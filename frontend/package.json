@@ -16,7 +16,7 @@
   "packageManager": "npm@10.9.2",
   "dependencies": {
     "@angular/animations": "^21.2.8",
-    "@angular/cdk": "^21.2.6",
+    "@angular/cdk": "^21.2.14",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
     "@angular/core": "^21.2.0",
@@ -33,7 +33,7 @@
     "echarts": "^6.0.0",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.7",
-    "rxjs": "~7.8.0",
+    "rxjs": "^7.8.2",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",
     "zone.js": "^0.16.1"
@@ -63,7 +63,11 @@
     "vitest-axe": "^0.1.0",
     "webpack-cli": "^7.0.2"
   },
-  "overrides": {
-    "caniuse-lite": "1.0.30001702"
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "core-js@3.50.0": true,
+    "esbuild@0.28.1": true,
+    "lmdb@3.5.1": true,
+    "msgpackr-extract@3.0.4": true
   }
 }

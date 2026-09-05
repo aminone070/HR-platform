@@ -10,9 +10,6 @@ export default {
       // so both component CSS (@apply) and template classes share one source
       // of truth – the :root / .dark variables defined in styles.css.
       colors: {
-<<<<<<< HEAD
-        // ── Semantic tokens — point to CSS vars so dark mode works automatically ──
-=======
         // Brand
         primary: {
           DEFAULT: 'var(--color-primary)',
@@ -49,7 +46,6 @@ export default {
         },
 
         // Neutral scale (mirrors --gray-* CSS vars; dark mode swaps via .dark)
->>>>>>> pr-5
         gray: {
           25:  'var(--gray-25)',
           50:  'var(--gray-50)',
@@ -64,36 +60,8 @@ export default {
           800: 'var(--gray-800)',
           900: 'var(--gray-900)',
         },
-<<<<<<< HEAD
-        primary: {
-          DEFAULT: 'var(--color-primary)',
-          hover:   'var(--color-primary-hover)',
-          dark:    'var(--color-primary-dark)',
-          light:   'var(--color-primary-light)',
-          muted:   'var(--color-primary-muted)',
-        },
-        surface: {
-          bg:      'var(--surface-bg)',
-          card:    'var(--surface-card)',
-          border:  'var(--surface-border)',
-          divider: 'var(--surface-divider)',
-        },
-        sidebar: {
-          bg:     'var(--sidebar-bg)',
-          border: 'var(--sidebar-border)',
-          text:   'var(--sidebar-text)',
-          accent: 'var(--sidebar-accent)',
-        },
-        success: 'var(--color-success)',
-        warning: 'var(--color-warning)',
-        error:   'var(--color-error)',
-        info:    'var(--color-info)',
-
-        // ── Kept for third-party components that still reference these ──
-=======
 
         // Fixed palette overrides (used in inline template classes)
->>>>>>> pr-5
         indigo: {
           50:  '#f0f4ff',
           100: '#e6edff',
@@ -138,62 +106,6 @@ export default {
         sans:    ['Inter', 'system-ui', 'sans-serif'],
         display: ['Inter Tight', 'system-ui', 'sans-serif'],
       },
-<<<<<<< HEAD
-      fontSize: {
-        xs:   ['0.75rem',   { lineHeight: '1rem' }],
-        sm:   ['0.875rem',  { lineHeight: '1.25rem' }],
-        base: ['1rem',      { lineHeight: '1.5rem' }],
-        lg:   ['1.125rem',  { lineHeight: '1.75rem' }],
-        xl:   ['1.25rem',   { lineHeight: '1.75rem' }],
-        '2xl':['1.5rem',    { lineHeight: '2rem' }],
-        '3xl':['1.875rem',  { lineHeight: '2.25rem' }],
-        '4xl':['2.25rem',   { lineHeight: '2.5rem' }],
-        '5xl':['3rem',      { lineHeight: '1' }],
-        '6xl':['3.75rem',   { lineHeight: '1' }],
-      },
-      spacing: {
-        0: '0',     1: '0.25rem', 2: '0.5rem',  3: '0.75rem',
-        4: '1rem',  5: '1.25rem', 6: '1.5rem',  7: '1.75rem',
-        8: '2rem',  9: '2.25rem', 10: '2.5rem', 12: '3rem',
-        14: '3.5rem', 16: '4rem', 20: '5rem',   24: '6rem',
-        28: '7rem', 32: '8rem',   36: '9rem',   40: '10rem',
-        44: '11rem',48: '12rem',  52: '13rem',  56: '14rem',
-        60: '15rem',64: '16rem',  72: '18rem',  80: '20rem',
-        96: '24rem',
-      },
-      borderRadius: {
-        none:    '0',
-        sm:      '0.125rem',
-        DEFAULT: '0.375rem',
-        md:      '0.5rem',
-        lg:      '0.75rem',
-        xl:      '1rem',
-        '2xl':   '1.5rem',
-        '3xl':   '2rem',
-        full:    '9999px',
-      },
-      boxShadow: {
-        // Point to CSS vars so shadows automatically adapt in dark mode
-        none:    'none',
-        xs:      'var(--shadow-xs)',
-        sm:      'var(--shadow-sm)',
-        DEFAULT: 'var(--shadow-md)',
-        md:      'var(--shadow-md)',
-        lg:      'var(--shadow-lg)',
-        xl:      'var(--shadow-xl)',
-        '2xl':   'var(--shadow-2xl)',
-      },
-      animation: {
-        none:   'none',
-        spin:   'spin 1s linear infinite',
-        ping:   'ping 1s cubic-bezier(0,0,0.2,1) infinite',
-        pulse:  'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite',
-        bounce: 'bounce 1s infinite',
-      },
-      transitionDuration: {
-        0: '0ms', 75: '75ms', 100: '100ms', 150: '150ms',
-        200: '200ms', 300: '300ms', 500: '500ms', 700: '700ms', 1000: '1000ms',
-=======
 
       // ── Shadows backed by CSS variables ───────────────────────────────
       boxShadow: {
@@ -298,7 +210,6 @@ export default {
         ping:          'ping 1s cubic-bezier(0,0,0.2,1) infinite',
         pulse:         'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite',
         bounce:        'bounce 1s infinite',
->>>>>>> pr-5
       },
     },
   },

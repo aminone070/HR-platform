@@ -35,8 +35,7 @@ export class Logger {
     return (
       typeof window !== 'undefined' &&
       window.location.hostname !== 'localhost' &&
-      !window.location.hostname.includes('127.0.0.1') &&
-      !window.location.hostname.includes('.replit.dev')
+      !window.location.hostname.includes('127.0.0.1')
     );
   }
 }

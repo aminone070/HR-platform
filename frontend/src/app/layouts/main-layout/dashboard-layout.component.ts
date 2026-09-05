@@ -204,20 +204,12 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
    * - Mobile/tablet (<1024px): open/close the overlay drawer
    */
   public toggleSidebar(): void {
-<<<<<<< HEAD
-    if (window.innerWidth >= 1024) {
-      this.isSidebarCollapsed.update(v => !v);
-    } else {
-      this.isSidebarOpen.update(state => !state);
-    }
-=======
     if (this.isMobileViewport()) {
       this.isSidebarOpen.update(state => !state);
       return;
     }
 
     this.isSidebarCollapsed.update(state => !state);
->>>>>>> pr-5
   }
 
   /**

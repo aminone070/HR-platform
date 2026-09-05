@@ -111,6 +111,18 @@ export const routes: Routes = [
         path: 'settings',
         children: SETTINGS_ROUTES,
       },
+
+      // User profile
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
+        canActivate: [authGuard],
+        data: {
+          title: 'Profile',
+          description: 'User account profile',
+        },
+      },
     ],
   },
 

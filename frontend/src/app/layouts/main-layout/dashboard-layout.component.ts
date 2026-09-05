@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal, inject, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterOutlet, RouterModule, Router, NavigationEnd } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -53,13 +53,13 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
   private authService = inject(AuthService);
   private router = inject(Router);
   private sanitizer = inject(DomSanitizer);
-  private cdr = inject(ChangeDetectorRef);
 
   private svg(s: string): SafeHtml { return this.sanitizer.bypassSecurityTrustHtml(s); }
 
   // Signals
   public isSidebarOpen = signal(false);
   public isSidebarCollapsed = signal(false);
+  public isMobileViewport = signal(false);
   public isUserMenuOpen = signal(false);
   public pageTitle = signal('Dashboard');
   public breadcrumbItems = signal<BreadcrumbItemData[]>([]);
@@ -71,6 +71,8 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
   private navigationSubscription: Subscription | null = null;
 
   ngOnInit(): void {
+    this.syncViewportState(true);
+
     // Initialize nav links with trusted SVG icons
     this.navLinks = [
       { path: '/dashboard',   label: 'Dashboard',   labelKey: 'nav.dashboard',   icon: this.svg(`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`) },
@@ -98,6 +100,25 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
   ngAfterViewInit(): void {
     // Setup tooltip positioning for sidebar nav items
     this.setupTooltips();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.syncViewportState(false);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeSidebar();
+    this.closeUserMenu();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (target && !target.closest('[data-user-menu]')) {
+      this.closeUserMenu();
+    }
   }
 
   ngOnDestroy(): void {
@@ -176,7 +197,12 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
    * Toggle sidebar open/close
    */
   public toggleSidebar(): void {
-    this.isSidebarOpen.update(state => !state);
+    if (this.isMobileViewport()) {
+      this.isSidebarOpen.update(state => !state);
+      return;
+    }
+
+    this.isSidebarCollapsed.update(state => !state);
   }
 
   /**
@@ -186,13 +212,35 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
     this.isSidebarOpen.set(false);
   }
 
+  public closeUserMenu(): void {
+    this.isUserMenuOpen.set(false);
+  }
+
   /**
    * Handle nav item click - close sidebar on mobile
    */
   public onNavItemClick(): void {
-    // Close sidebar on mobile (<768px)
-    if (window.innerWidth < 768) {
-      this.isSidebarOpen.set(false);
+    this.closeSidebar();
+    this.closeUserMenu();
+  }
+
+  private syncViewportState(initial: boolean): void {
+    const mobile = window.innerWidth < 768;
+    const wasMobile = this.isMobileViewport();
+
+    this.isMobileViewport.set(mobile);
+
+    if (mobile) {
+      this.isSidebarCollapsed.set(false);
+      if (initial || !wasMobile) {
+        this.isSidebarOpen.set(false);
+      }
+      return;
+    }
+
+    this.isSidebarOpen.set(false);
+    if (initial) {
+      this.isSidebarCollapsed.set(window.innerWidth < 1280);
     }
   }
 
@@ -246,6 +294,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
       '/analytics': 'Analytics',
       '/attendance': 'Attendance',
       '/settings': 'Settings',
+      '/profile': 'Profile',
     };
 
     const title = Object.keys(titles).find(path => url.startsWith(path));
@@ -277,6 +326,10 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
       '/attendance': [
         { label: 'Dashboard', path: '/dashboard' },
         { label: 'Attendance' }
+      ],
+      '/profile': [
+        { label: 'Dashboard', path: '/dashboard' },
+        { label: 'Profile' }
       ],
     };
 

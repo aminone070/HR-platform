@@ -36,11 +36,9 @@ import { CommonModule } from '@angular/common';
     </div>
   </div>
 
-  <div class="grid items-start gap-4 xl:grid-cols-2">
-    <!-- Left column: Calendar + Table -->
-    <div class="flex flex-col gap-4 max-md:gap-3">
-      <!-- Attendance heat calendar -->
-      <div class="card-3d">
+  <div class="grid items-start gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(420px,0.92fr)]">
+    <!-- Attendance heat calendar -->
+    <div class="card-3d">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3">
           <div class="text-sm font-semibold text-gray-900 max-md:text-[13px]">July 2026 Attendance Map</div>
           <div class="flex items-center gap-2 text-[11.5px] text-gray-400">
@@ -67,47 +65,7 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <!-- Today's attendance table -->
-      <div class="overflow-hidden overflow-x-auto rounded-lg border border-surface-border bg-surface-card shadow-sm">
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-[18px] py-3.5">
-          <div class="text-sm font-semibold text-gray-900">Today's Records</div>
-          <span class="badge badge-success">{{ todayDate }}</span>
-        </div>
-        <div class="overflow-x-auto">
-          <table>
-            <thead>
-              <tr>
-                <th>Employee</th>
-                <th>Department</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Hours</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let r of records">
-                <td>
-                    <div class="flex items-center gap-2.5">
-                     <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold text-white max-md:h-7 max-md:w-7 max-md:text-[10px]" [style.background]="r.color">{{ r.initials }}</div>
-                    <div>
-                       <div class="text-[13.5px] font-medium text-gray-900">{{ r.name }}</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-gray-500">{{ r.dept }}</td>
-                <td class="text-[13px] text-gray-700">{{ r.checkIn }}</td>
-                <td class="text-[13px] text-gray-700">{{ r.checkOut }}</td>
-                <td class="text-[13px] font-semibold text-gray-900">{{ r.hours }}</td>
-                <td><span class="badge" [ngClass]="r.statusClass">{{ r.status }}</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right column: Side cards (Absence Reasons + Late Arrivals) -->
+    <!-- Insight cards -->
     <div class="grid items-start gap-4 sm:grid-cols-2 xl:grid-cols-2">
       <!-- Absence reasons -->
       <div class="card-3d self-start">
@@ -160,6 +118,46 @@ import { CommonModule } from '@angular/common';
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Today's attendance records -->
+  <div class="mt-4 overflow-hidden overflow-x-auto rounded-lg border border-surface-border bg-surface-card shadow-sm">
+    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-[18px] py-3.5">
+      <div>
+        <div class="text-sm font-semibold text-gray-900">Today's Records</div>
+        <p class="mt-1 text-[11px] text-gray-400">Live attendance activity across the organization</p>
+      </div>
+      <span class="badge badge-success">{{ todayDate }}</span>
+    </div>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Department</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Hours</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of records">
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold text-white max-md:h-7 max-md:w-7 max-md:text-[10px]" [style.background]="r.color">{{ r.initials }}</div>
+                <div class="text-[13.5px] font-medium text-gray-900">{{ r.name }}</div>
+              </div>
+            </td>
+            <td class="text-gray-500">{{ r.dept }}</td>
+            <td class="text-[13px] text-gray-700">{{ r.checkIn }}</td>
+            <td class="text-[13px] text-gray-700">{{ r.checkOut }}</td>
+            <td class="text-[13px] font-semibold text-gray-900">{{ r.hours }}</td>
+            <td><span class="badge" [ngClass]="r.statusClass">{{ r.status }}</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

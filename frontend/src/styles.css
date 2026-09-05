@@ -286,6 +286,75 @@
 }
 
 /* ============================================================
+   Responsive application shell
+   - Phones: the sidebar is an off-canvas drawer.
+   - Tablet/desktop: the sidebar is a collapsible navigation rail.
+   ============================================================ */
+.app-sidebar {
+  will-change: width, transform;
+}
+
+@media (min-width: 768px) {
+  .app-sidebar {
+    width: 240px;
+  }
+
+  .app-sidebar.sidebar-collapsed {
+    width: 70px;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-copy,
+  .app-sidebar.sidebar-collapsed .sidebar-section-label,
+  .app-sidebar.sidebar-collapsed .sidebar-link-label,
+  .app-sidebar.sidebar-collapsed .sidebar-user-copy {
+    display: none !important;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-brand,
+  .app-sidebar.sidebar-collapsed .sidebar-user {
+    justify-content: center;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-brand {
+    padding-inline: 0.5rem;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-nav,
+  .app-sidebar.sidebar-collapsed .sidebar-footer {
+    margin-inline: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-link {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .app-sidebar.sidebar-collapsed .sidebar-user {
+    margin-inline: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .app-sidebar {
+    transform: translateX(-110%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  [dir="rtl"] .app-sidebar {
+    transform: translateX(110%);
+  }
+
+  .app-sidebar.sidebar-mobile-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+/* ============================================================
    Component layer — reusable multi-property patterns
    ============================================================ */
 @layer components {

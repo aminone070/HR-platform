@@ -29,9 +29,10 @@ import { CommonModule } from '@angular/common';
 
       .main-grid {
         display: grid;
-        grid-template-columns: 1fr 320px;
+        grid-template-columns: 1fr minmax(260px, 320px);
         gap: 16px;
         margin-bottom: 24px;
+        align-items: stretch;
       }
       @media (max-width: 1200px) {
         .main-grid {

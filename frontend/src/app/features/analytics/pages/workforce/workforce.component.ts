@@ -39,11 +39,17 @@ import {
 
       .chart-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 16px;
         margin-bottom: 16px;
+        align-items: stretch;
       }
-      @media (max-width: 900px) {
+      @media (max-width: 1100px) {
+        .chart-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 700px) {
         .chart-grid {
           grid-template-columns: 1fr;
         }

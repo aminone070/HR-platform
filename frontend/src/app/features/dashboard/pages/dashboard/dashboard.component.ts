@@ -51,9 +51,10 @@ import { CommonModule } from '@angular/common';
       /* ── Middle grid ───────────────── */
       .mid-grid {
         display: grid;
-        grid-template-columns: 1fr 340px;
+        grid-template-columns: 1fr minmax(280px, 340px);
         gap: 16px;
         margin-bottom: 16px;
+        align-items: stretch;
       }
       @media (max-width: 900px) {
         .mid-grid {
@@ -66,6 +67,7 @@ import { CommonModule } from '@angular/common';
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
+        align-items: stretch;
       }
       @media (max-width: 900px) {
         .bot-grid {

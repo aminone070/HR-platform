@@ -70,9 +70,9 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="grid items-stretch gap-4 lg:grid-cols-[3fr_2fr]">
+      <div class="grid items-stretch gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr]">
         <!-- Attendance heat calendar -->
-        <div class="card-3d" style="display: flex; flex-direction: column;">
+        <div class="card-3d lg:col-span-2 xl:col-span-1" style="display: flex; flex-direction: column;">
           <div
             class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3"
           >
@@ -118,9 +118,8 @@ import { CommonModule } from '@angular/common';
         </div>
 
         <!-- Insight cards -->
-        <div class="flex flex-col gap-4">
-          <!-- Absence reasons -->
-          <div class="card-3d">
+        <!-- Absence reasons -->
+        <div class="card-3d">
             <div
               class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3"
             >
@@ -167,7 +166,7 @@ import { CommonModule } from '@angular/common';
           </div>
 
           <!-- Late arrivals trend -->
-          <div class="card-3d self-start">
+          <div class="card-3d">
             <div
               class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3"
             >
@@ -216,7 +215,6 @@ import { CommonModule } from '@angular/common';
               </div>
             </div>
           </div>
-        </div>
       </div>
 
       <!-- Today's attendance records -->

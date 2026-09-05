@@ -6,7 +6,6 @@ import { I18nService, ThemeService } from '@app/core';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App implements OnInit {
   constructor(

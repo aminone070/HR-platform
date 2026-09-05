@@ -10,7 +10,7 @@ import {
   computed,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { SelectComponent, SelectOption } from '../select/select.component';
 
 /**
  * Filter Panel Component
@@ -47,10 +47,9 @@ export interface FilterPreset {
 @Component({
   selector: 'app-filter-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filter-panel.component.html',
-  styleUrl: './filter-panel.component.css'
+  templateUrl: './filter-panel.component.html'
 })
 export class FilterPanelComponent implements OnInit, OnDestroy {
   @Input() criteria: FilterCriteria = {};
@@ -63,6 +62,14 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
 
   departments = ['Engineering', 'Sales', 'HR', 'Finance', 'Marketing'];
   regions = ['North', 'South', 'East', 'West', 'Central'];
+  departmentOptions: SelectOption[] = this.departments.map((department) => ({
+    value: department,
+    label: department,
+  }));
+  regionOptions: SelectOption[] = this.regions.map((region) => ({
+    value: region,
+    label: region,
+  }));
 
   ngOnInit(): void {
     // Initialize with provided criteria
@@ -87,6 +94,16 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
       region: this.selectedRegions(),
     };
     this.filterChange.emit(updatedCriteria);
+  }
+
+  onDepartmentsChange(values: string[]): void {
+    this.selectedDepartments.set(values);
+    this.onFilterChange();
+  }
+
+  onRegionsChange(values: string[]): void {
+    this.selectedRegions.set(values);
+    this.onFilterChange();
   }
 
   resetFilters(): void {

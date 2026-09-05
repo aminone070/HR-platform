@@ -4,6 +4,8 @@ import {
   Output,
   EventEmitter,
   OnInit,
+  OnChanges,
+  SimpleChanges,
   signal,
   computed,
   HostListener,
@@ -39,12 +41,14 @@ export interface SelectOptionGroup {
   imports: [CommonModule, FormsModule],
   templateUrl: './select.component.html',
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements OnInit, OnChanges {
   @Input() id = 'select-' + Math.random().toString(36).substr(2, 9);
   @Input() label: string | null = null;
   @Input() ariaLabel: string | null = null;
   @Input() options: SelectOption[] = [];
   @Input() multiple = false;
+  @Input() value: any = undefined;
+  @Input() values: any[] = [];
   @Input() searchable = false;
   @Input() disabled = false;
   @Input() error: string | null = null;
@@ -58,7 +62,23 @@ export class SelectComponent implements OnInit {
   searchQuery = signal('');
 
   ngOnInit() {
-    // Initialize with any pre-selected values if needed
+    this.syncSelection();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value'] || changes['values'] || changes['multiple']) {
+      this.syncSelection();
+    }
+  }
+
+  private syncSelection(): void {
+    if (this.multiple) {
+      this.selectedValues.set([...this.values]);
+    } else if (this.value !== undefined && this.value !== null) {
+      this.selectedValues.set([this.value]);
+    } else {
+      this.selectedValues.set([]);
+    }
   }
 
   toggleOpen() {
@@ -183,15 +203,15 @@ export class SelectComponent implements OnInit {
   }
 
   getSelectButtonClasses(): string {
-    return `w-full px-4 py-2 text-left bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-between transition-colors ${this.isOpen() ? 'ring-2 ring-indigo-500' : ''}`;
+    return `w-full rounded-lg border border-gray-200 bg-surface-card px-3 py-2.5 text-left text-sm text-gray-800 shadow-xs outline-none transition-all hover:border-gray-300 focus:ring-2 focus:ring-primary-muted disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-between ${this.isOpen() ? 'border-primary ring-2 ring-primary-muted' : ''}`;
   }
 
   getDropdownClasses(): string {
-    return `absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto ${this.searchable ? 'pt-10' : ''}`;
+    return `absolute left-0 right-0 top-full z-[200] mt-1 max-h-60 overflow-y-auto rounded-lg border border-surface-border bg-surface-card shadow-lg ${this.searchable ? 'pt-10' : ''}`;
   }
 
   getOptionClasses(option: SelectOption): string {
     const isSelected = this.isSelected(option);
-    return `w-full text-left px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-indigo-50 dark:hover:bg-slate-700 focus:outline-none focus:bg-indigo-50 dark:focus:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center ${isSelected ? 'bg-indigo-100 dark:bg-indigo-900' : ''}`;
+    return `w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 focus:bg-primary-muted focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 flex items-center ${isSelected ? 'bg-primary-muted text-primary font-medium' : ''}`;
   }
 }

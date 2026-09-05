@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg p-6">
   <!-- Filter Panel Header -->
   <div class="flex items-center justify-between mb-6">
@@ -59,4 +60,55 @@
   <div *ngIf="showAdvanced()" class="border-t border-gray-200 dark:border-gray-700 pt-6">
     <p class="text-sm text-gray-600 dark:text-gray-400">Advanced filtering options available</p>
   </div>
+=======
+<div class="bg-surface-card rounded-lg shadow-md dark:shadow-lg p-6">
+ <!-- Filter Panel Header -->
+ <div class="flex items-center justify-between mb-6">
+ <h3 class="text-lg font-semibold text-gray-900 ">Filters</h3>
+ <div class="flex items-center gap-2">
+ <button
+ (click)="toggleAdvanced()"
+ class="text-sm text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-indigo-300"
+ [attr.aria-label]="showAdvanced() ? 'Hide advanced filters' : 'Show advanced filters'"
+ >
+ {{ showAdvanced() ? 'Hide' : 'Show' }} Advanced
+ </button>
+ <button
+ (click)="resetFilters()"
+ class="text-sm text-gray-600 hover:text-gray-900 "
+ aria-label="Reset all filters"
+ >
+ Reset
+ </button>
+ </div>
+ </div>
+
+ <!-- Basic Filters -->
+ <div class="space-y-4 mb-6">
+ <!-- Department Filter -->
+  <app-select
+  label="Department"
+  ariaLabel="Filter by department"
+  [options]="departmentOptions"
+  [values]="selectedDepartments()"
+  [multiple]="true"
+  (selectionChange)="onDepartmentsChange($event)"
+  ></app-select>
+
+ <!-- Region Filter -->
+  <app-select
+  label="Region"
+  ariaLabel="Filter by region"
+  [options]="regionOptions"
+  [values]="selectedRegions()"
+  [multiple]="true"
+  (selectionChange)="onRegionsChange($event)"
+  ></app-select>
+ </div>
+
+ <!-- Advanced Filters Section -->
+ <div *ngIf="showAdvanced()" class="border-t border-surface-border pt-6">
+ <p class="text-sm text-gray-600 ">Advanced filtering options available</p>
+ </div>
+>>>>>>> pr-5
 </div>

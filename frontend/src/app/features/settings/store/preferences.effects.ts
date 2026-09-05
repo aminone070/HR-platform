@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap, retry } from 'rxjs/operators';
 import * as PreferencesActions from './preferences.actions';
+import { UserPreferences } from './preferences.state';
 
 /**
  * PreferencesEffects handles side effects for user preference operations.
@@ -70,6 +71,16 @@ export class PreferencesEffects {
     this.actions$.pipe(
       ofType(PreferencesActions.updatePreferences),
       switchMap(({ preferences }) => {
+        let storedPreferences: Partial<UserPreferences> = {};
+        try {
+          const rawPreferences = localStorage.getItem('userPreferences');
+          if (rawPreferences) {
+            storedPreferences = JSON.parse(rawPreferences) as Partial<UserPreferences>;
+          }
+        } catch (error) {
+          console.warn('[PreferencesEffects] Ignoring invalid stored preferences:', error);
+        }
+
         const updatedPreferences = {
           userId: 'user-1',
           language: 'en' as const,
@@ -81,6 +92,7 @@ export class PreferencesEffects {
           itemsPerPage: 10,
           defaultDashboard: 'main',
           savedFilters: [],
+          ...storedPreferences,
           ...preferences,
         };
 

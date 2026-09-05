@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SelectComponent, SelectOption } from '../../../../shared/components/ui/select/select.component';
 
 @Component({
   selector: 'app-workforce',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     :host { display: block; }
@@ -57,11 +58,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
       <p class="page-subtitle">Workforce analytics & insights · Q2 2026</p>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <select class="input" style="width:auto;height:36px;font-size:13px;padding:0 10px;">
-        <option>Last 6 months</option>
-        <option>Last 12 months</option>
-        <option>This quarter</option>
-      </select>
+      <app-select
+        ariaLabel="Analytics period"
+        [options]="periodOptions"
+        [value]="selectedPeriod"
+        (selectionChange)="selectedPeriod = $event"
+      ></app-select>
       <button class="btn btn-secondary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export
@@ -214,6 +216,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class WorkforceComponent {
   private sanitizer = inject(DomSanitizer);
   private svg(s: string): SafeHtml { return this.sanitizer.bypassSecurityTrustHtml(s); }
+  selectedPeriod = 'last-6-months';
+  periodOptions: SelectOption[] = [
+    { value: 'last-6-months', label: 'Last 6 months' },
+    { value: 'last-12-months', label: 'Last 12 months' },
+    { value: 'this-quarter', label: 'This quarter' },
+  ];
 
   kpis = [
     { label: 'Total Headcount',  value: '1,284', delta: '+9.4%',  up: true,  color: '#4f6ef7' },

@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { FormsModule } from '@angular/forms';
 import { IconComponent } from '../icon/icon.component';
+import { SelectComponent, SelectOption } from '../select/select.component';
 import { I18nService } from '@app/core';
 import { fadeIn, slideInUp } from '@app/shared/animations';
 
@@ -33,11 +33,10 @@ export interface SortState {
 @Component({
   selector: 'app-data-table',
   standalone: true,
-  imports: [CommonModule, ScrollingModule, FormsModule, IconComponent],
+  imports: [CommonModule, ScrollingModule, IconComponent, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeIn, slideInUp],
-  templateUrl: './data-table.component.html',
-  styleUrl: './data-table.component.css'
+  templateUrl: './data-table.component.html'
 })
 export class DataTableComponent implements OnInit, OnDestroy {
   @Input() title = 'Data Table';
@@ -54,6 +53,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   // Signals
   pageSizeInternal = signal(25);
+  pageSizeOptions: SelectOption[] = [10, 25, 50, 100].map((size) => ({
+    value: size,
+    label: `${size} records`,
+  }));
   currentPage = signal(0);
   sortState = signal<SortState>({ column: null, direction: 'asc' });
   selectedRows = signal<Set<string>>(new Set());
@@ -135,6 +138,11 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   onPageSizeChange(): void {
     this.currentPage.set(0);
+  }
+
+  onPageSizeSelect(value: number): void {
+    this.pageSizeInternal.set(Number(value));
+    this.onPageSizeChange();
   }
 
   nextPage(): void {

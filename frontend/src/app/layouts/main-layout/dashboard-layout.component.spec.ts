@@ -59,10 +59,11 @@ describe('DashboardLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle sidebar appropriately', () => {
-    expect(component.isSidebarOpen()).toBe(false);
+  it('should toggle the desktop sidebar between expanded and collapsed states', () => {
+    const initialCollapsedState = component.isSidebarCollapsed();
     component.toggleSidebar();
-    expect(component.isSidebarOpen()).toBe(true);
+    expect(component.isSidebarCollapsed()).toBe(!initialCollapsedState);
+    expect(component.isSidebarOpen()).toBe(false);
   });
 
   it('should allow toggling the language and notify the service', () => {

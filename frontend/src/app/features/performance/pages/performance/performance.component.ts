@@ -320,9 +320,9 @@ import { CommonModule } from '@angular/common';
           </div>
 
           <!-- Score distribution -->
-          <div class="card-3d">
+          <div class="card-3d" style="flex: 1; display: flex; flex-direction: column;">
             <div class="card-head"><div class="card-head-title">Score Distribution</div></div>
-            <div class="card-body" style="padding-top:12px;padding-bottom:12px;">
+            <div class="card-body" style="padding-top:12px;padding-bottom:12px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
               <div *ngFor="let d of distribution" class="dist-row">
                 <span class="dist-label">{{ d.label }}</span>
                 <div class="dist-bar">

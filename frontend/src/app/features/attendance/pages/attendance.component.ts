@@ -70,9 +70,9 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="grid items-start gap-4 lg:grid-cols-[3fr_2fr]">
+      <div class="grid items-stretch gap-4 lg:grid-cols-[3fr_2fr]">
         <!-- Attendance heat calendar -->
-        <div class="card-3d">
+        <div class="card-3d" style="display: flex; flex-direction: column;">
           <div
             class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3"
           >
@@ -91,7 +91,7 @@ import { CommonModule } from '@angular/common';
               >
             </div>
           </div>
-          <div class="p-5 max-md:p-4">
+          <div class="p-5 max-md:p-4" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
             <div class="grid grid-cols-7 gap-1 max-md:gap-0.5">
               <div
                 *ngFor="let d of dayLabels"

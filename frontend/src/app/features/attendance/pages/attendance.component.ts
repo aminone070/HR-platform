@@ -70,7 +70,7 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="grid items-stretch gap-4 lg:grid-cols-[3fr_2fr]">
+      <div class="grid items-start gap-4 lg:grid-cols-[3fr_2fr]">
         <!-- Attendance heat calendar -->
         <div class="card-3d">
           <div

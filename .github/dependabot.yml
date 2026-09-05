@@ -10,9 +10,10 @@ updates:
     labels:
       - "dependencies"
       - "frontend"
-    # Ignore specific packages if they often break or you want manual control
-    # ignore:
-    #   - dependency-name: "typescript"
+    groups:
+      frontend-dependencies:
+        patterns:
+          - "*"
 
   # Maintain github actions dependencies
   - package-ecosystem: "github-actions"
@@ -24,3 +25,7 @@ updates:
     labels:
       - "dependencies"
       - "actions"
+    groups:
+      github-actions:
+        patterns:
+          - "*"

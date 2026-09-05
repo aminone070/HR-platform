@@ -70,7 +70,7 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="grid items-start gap-4 lg:grid-cols-[3fr_2fr]">
+      <div class="grid items-stretch gap-4 lg:grid-cols-[3fr_2fr]">
         <!-- Attendance heat calendar -->
         <div class="card-3d">
           <div
@@ -107,7 +107,7 @@ import { CommonModule } from '@angular/common';
                 [style.background]="cell.day ? cell.bg : ''"
                 [style.opacity]="cell.day ? 1 : 0"
                 [title]="cell.day ? 'Day ' + cell.day + ': ' + cell.rate + '% attendance' : ''"
-                class="flex aspect-square min-h-8 cursor-pointer items-center justify-center rounded border border-transparent text-[10.5px] text-gray-400 transition-all hover:border-primary hover:text-primary max-md:min-h-7 max-md:rounded-sm max-md:text-[9px]"
+                class="flex h-[62px] cursor-pointer items-center justify-center rounded border border-transparent text-[10.5px] text-gray-400 transition-all hover:border-primary hover:text-primary max-md:h-[48px] max-md:rounded-sm max-md:text-[9px]"
                 [class.text-white]="cell.day && cell.rate !== null"
                 [class.font-semibold]="cell.day && cell.rate !== null"
               >
@@ -118,9 +118,9 @@ import { CommonModule } from '@angular/common';
         </div>
 
         <!-- Insight cards -->
-        <div class="grid items-start gap-4 sm:grid-cols-2 xl:grid-cols-2">
+        <div class="flex flex-col gap-4">
           <!-- Absence reasons -->
-          <div class="card-3d self-start">
+          <div class="card-3d">
             <div
               class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3"
             >

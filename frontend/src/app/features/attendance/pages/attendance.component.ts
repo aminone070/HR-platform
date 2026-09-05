@@ -6,8 +6,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+      .page {
+        padding: 28px 28px 40px;
+        max-width: 1400px;
+      }
+      @media (max-width: 768px) {
+        .page {
+          padding: 16px 16px 32px;
+        }
+      }
+    `,
+  ],
   template: `
-    <div class="min-h-full bg-surface-bg p-7 max-md:p-4">
+    <div class="min-h-full bg-surface-bg">
+      <div class="page">
       <div class="page-header">
         <div>
           <h1 class="page-title">Attendance</h1>
@@ -54,7 +71,7 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
 
-      <div class="grid items-start gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(420px,0.92fr)]">
+      <div class="grid items-start gap-4 lg:grid-cols-[3fr_2fr]">
         <!-- Attendance heat calendar -->
         <div class="card-3d">
           <div
@@ -255,6 +272,7 @@ import { CommonModule } from '@angular/common';
           </table>
         </div>
       </div>
+    </div>
     </div>
   `,
 })

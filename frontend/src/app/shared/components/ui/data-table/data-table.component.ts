@@ -36,7 +36,7 @@ export interface SortState {
   imports: [CommonModule, ScrollingModule, IconComponent, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeIn, slideInUp],
-  templateUrl: './data-table.component.html'
+  templateUrl: './data-table.component.html',
 })
 export class DataTableComponent implements OnInit, OnDestroy {
   @Input() title = 'Data Table';
@@ -66,7 +66,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   filteredData = computed(() => {
     const data = this.data;
     if (!data || data.length === 0) return [];
-    
+
     // Create copy for sorting
     const result = [...data];
 

@@ -16,7 +16,6 @@ import { inject } from '@angular/core';
 export class AuthorizationGuardService {
   private router = inject(Router);
 
-
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // TODO: Replace with actual authorization check
     // For now, always return true to allow development

@@ -99,11 +99,11 @@ describe('Dashboard Selectors', () => {
     });
 
     it('should fallback to default config if none selected', () => {
-       // Based on implementation, usually it defaults, but our current selector just looks up id.
-       // The UI enforces default selection mostly.
-       const stateWithBadId = { dashboard: { ...mockState, currentConfigId: 'missing' } };
-       const result = selectCurrentDashboardConfig(stateWithBadId as any);
-       expect(result).toBeUndefined();
+      // Based on implementation, usually it defaults, but our current selector just looks up id.
+      // The UI enforces default selection mostly.
+      const stateWithBadId = { dashboard: { ...mockState, currentConfigId: 'missing' } };
+      const result = selectCurrentDashboardConfig(stateWithBadId as any);
+      expect(result).toBeUndefined();
     });
   });
 

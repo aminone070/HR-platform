@@ -1,6 +1,6 @@
 /**
  * Application Configuration
- * 
+ *
  * Bootstraps the HR Platform with:
  * - Core services and providers
  * - Feature-based routing with lazy loading
@@ -28,7 +28,7 @@ import { getStoreConfig } from './store.config';
 
 /**
  * Application Configuration
- * 
+ *
  * Features:
  * - Centralized provider management
  * - Feature-based store registration
@@ -58,12 +58,12 @@ export const appConfig: ApplicationConfig = {
 
     // NgRx Store DevTools (for debugging in development)
     provideStoreDevtools({
-      maxAge: 25,                // Retain last 25 actions
-      logOnly: !isDevMode(),     // Log only in production
+      maxAge: 25, // Retain last 25 actions
+      logOnly: !isDevMode(), // Log only in production
       features: {
-        pause: true,             // Pause action dispatch
-        lock: true,              // Lock time-travel
-        persist: true,           // Persist state
+        pause: true, // Pause action dispatch
+        lock: true, // Lock time-travel
+        persist: true, // Persist state
       },
     }),
   ],

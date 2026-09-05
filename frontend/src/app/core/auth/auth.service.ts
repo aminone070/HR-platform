@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 /**
  * Authentication Service - Validates: Requirements 30.1, 30.5
- * 
+ *
  * Handles JWT-based authentication with:
  * - Login/logout functionality
  * - Token management
@@ -40,7 +40,7 @@ export interface User {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private readonly API_URL = '/api/auth';
@@ -67,19 +67,18 @@ export class AuthService {
    * Login with username and password
    */
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.API_URL}/login`, credentials)
-      .pipe(
-        tap(response => {
-          this.setTokens(response.token, response.refreshToken);
-          this.setUserData(response.user);
-          this.isAuthenticatedSubject.next(true);
-          this.resetSessionTimeout();
-        }),
-        catchError(error => {
-          console.error('Login failed:', error);
-          return throwError(() => new Error('Login failed. Please check your credentials.'));
-        })
-      );
+    return this.http.post<LoginResponse>(`${this.API_URL}/login`, credentials).pipe(
+      tap((response) => {
+        this.setTokens(response.token, response.refreshToken);
+        this.setUserData(response.user);
+        this.isAuthenticatedSubject.next(true);
+        this.resetSessionTimeout();
+      }),
+      catchError((error) => {
+        console.error('Login failed:', error);
+        return throwError(() => new Error('Login failed. Please check your credentials.'));
+      }),
+    );
   }
 
   /**
@@ -102,17 +101,16 @@ export class AuthService {
       return throwError(() => new Error('No refresh token available'));
     }
 
-    return this.http.post<LoginResponse>(`${this.API_URL}/refresh`, { refreshToken })
-      .pipe(
-        tap(response => {
-          this.setTokens(response.token, response.refreshToken);
-          this.resetSessionTimeout();
-        }),
-        catchError(error => {
-          this.logout();
-          return throwError(() => new Error('Token refresh failed'));
-        })
-      );
+    return this.http.post<LoginResponse>(`${this.API_URL}/refresh`, { refreshToken }).pipe(
+      tap((response) => {
+        this.setTokens(response.token, response.refreshToken);
+        this.resetSessionTimeout();
+      }),
+      catchError((error) => {
+        this.logout();
+        return throwError(() => new Error('Token refresh failed'));
+      }),
+    );
   }
 
   /**
@@ -156,7 +154,7 @@ export class AuthService {
    */
   hasAnyRole(roles: string[]): boolean {
     const user = this.getCurrentUser();
-    return user ? roles.some(role => user.roles.includes(role)) : false;
+    return user ? roles.some((role) => user.roles.includes(role)) : false;
   }
 
   /**
@@ -164,7 +162,7 @@ export class AuthService {
    */
   hasAllRoles(roles: string[]): boolean {
     const user = this.getCurrentUser();
-    return user ? roles.every(role => user.roles.includes(role)) : false;
+    return user ? roles.every((role) => user.roles.includes(role)) : false;
   }
 
   /**
@@ -173,8 +171,8 @@ export class AuthService {
   getAuthHeader(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
   }
 
@@ -221,8 +219,8 @@ export class AuthService {
     const jsonPayload = decodeURIComponent(
       atob(base64)
         .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(''),
     );
     return JSON.parse(jsonPayload);
   }

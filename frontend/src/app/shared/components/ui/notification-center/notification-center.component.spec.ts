@@ -14,14 +14,28 @@ describe('NotificationCenterComponent', () => {
 
     fixture = TestBed.createComponent(NotificationCenterComponent);
     component = fixture.componentInstance;
-    
+
     // Mock initial notifications
     const mockNotifs: Notification[] = [
-      { id: '1', title: 'Test', message: 'Hello', read: false, type: 'info', timestamp: new Date().toISOString() },
-      { id: '2', title: 'Test 2', message: 'Read already', read: true, type: 'success', timestamp: new Date().toISOString() }
+      {
+        id: '1',
+        title: 'Test',
+        message: 'Hello',
+        read: false,
+        type: 'info',
+        timestamp: new Date().toISOString(),
+      },
+      {
+        id: '2',
+        title: 'Test 2',
+        message: 'Read already',
+        read: true,
+        type: 'success',
+        timestamp: new Date().toISOString(),
+      },
     ];
     component.notifications.set(mockNotifs);
-    
+
     fixture.detectChanges();
   });
 
@@ -43,7 +57,7 @@ describe('NotificationCenterComponent', () => {
   it('should map markAllAsRead correctly to all items', () => {
     component.markAllAsRead();
     const notifs = component.notifications();
-    expect(notifs.every(n => n.read)).toBe(true);
+    expect(notifs.every((n) => n.read)).toBe(true);
     expect(component.unreadCount()).toBe(0);
   });
 
@@ -60,7 +74,7 @@ describe('NotificationCenterComponent', () => {
     const emitSpy = vi.spyOn(component.preferencesChanged, 'emit');
     component.preferences.pushNotifications = false;
     component.savePreferences();
-    
+
     expect(emitSpy).toHaveBeenCalledWith(component.preferences);
     const lsPrefs = JSON.parse(localStorage.getItem('notificationPreferences') || '{}');
     expect(lsPrefs.pushNotifications).toBe(false);

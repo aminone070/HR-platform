@@ -10,9 +10,7 @@ export const EMPLOYEES_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/employees/employees.component').then(
-        (m) => m.EmployeesComponent
-      ),
+      import('./pages/employees/employees.component').then((m) => m.EmployeesComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Employees',
@@ -24,7 +22,7 @@ export const EMPLOYEES_ROUTES: Routes = [
     path: ':id',
     loadComponent: () =>
       import('./pages/employee-detail/employee-detail.component').then(
-        (m) => m.EmployeeDetailComponent
+        (m) => m.EmployeeDetailComponent,
       ),
     canActivate: [authGuard, authorizationGuard],
     data: {

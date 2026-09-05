@@ -123,7 +123,7 @@ export class DatePickerComponent implements OnInit {
     startDate.setDate(startDate.getDate() - firstDay.getDay());
 
     const days = [];
-    let date = new Date(startDate);
+    const date = new Date(startDate);
 
     for (let i = 0; i < 42; i++) {
       const isCurrentMonth = date.getMonth() === month;

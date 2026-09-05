@@ -17,10 +17,7 @@ describe('AuthGuard', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [
-        AuthGuardService,
-        { provide: Router, useValue: mockRouter },
-      ],
+      providers: [AuthGuardService, { provide: Router, useValue: mockRouter }],
     });
     service = TestBed.inject(AuthGuardService);
   });

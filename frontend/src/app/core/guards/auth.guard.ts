@@ -16,7 +16,6 @@ import { inject } from '@angular/core';
 export class AuthGuardService {
   private router = inject(Router);
 
-
   canActivate(): boolean {
     // TODO: Replace with actual authentication check
     // For now, always return true to allow development

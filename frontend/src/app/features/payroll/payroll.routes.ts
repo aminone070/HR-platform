@@ -9,8 +9,7 @@ import { authGuard, authorizationGuard } from '../../core';
 export const PAYROLL_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/payroll.component').then((m) => m.PayrollComponent),
+    loadComponent: () => import('./pages/payroll.component').then((m) => m.PayrollComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Payroll',

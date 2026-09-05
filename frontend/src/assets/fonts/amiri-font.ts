@@ -6,6 +6,6 @@
 
 // Placeholder base64 encoded font data for Amiri font
 // For production, replace this with the actual font file
-export const AMIRI_FONT_BASE64 = 
+export const AMIRI_FONT_BASE64 =
   'AAEAAAALAIAAAwAwRkZUMAwAiwIAABkYAAAAHEdERUYAZAAFAAAZDAAAACBHUE9T3QMGrwAAGTgAAAC0R0' +
   'VOTE8AAwAFAAAZIAAAACA==';

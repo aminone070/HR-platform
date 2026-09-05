@@ -25,10 +25,7 @@ describe('PreferencesEffects', () => {
   beforeEach(() => {
     actions$ = new Subject();
     TestBed.configureTestingModule({
-      providers: [
-        PreferencesEffects,
-        provideMockActions(() => actions$),
-      ],
+      providers: [PreferencesEffects, provideMockActions(() => actions$)],
     });
     effects = TestBed.inject(PreferencesEffects);
     localStorage.clear();

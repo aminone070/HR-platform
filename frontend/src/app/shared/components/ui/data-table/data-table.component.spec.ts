@@ -15,25 +15,23 @@ describe('DataTableComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [DataTableComponent, ScrollingModule, BrowserAnimationsModule],
-      providers: [
-        { provide: I18nService, useValue: i18nMock }
-      ]
+      providers: [{ provide: I18nService, useValue: i18nMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DataTableComponent);
     component = fixture.componentInstance;
-    
+
     // Setup basic input data
     component.columns = [
       { key: 'name', label: 'Name', sortable: true },
-      { key: 'department', label: 'Department', sortable: true }
+      { key: 'department', label: 'Department', sortable: true },
     ];
     component.data = [
       { id: '1', name: 'Zane', department: 'HR' },
       { id: '2', name: 'Alice', department: 'Engineering' },
-      { id: '3', name: 'Bob', department: 'Engineering' }
+      { id: '3', name: 'Bob', department: 'Engineering' },
     ];
-    
+
     fixture.detectChanges();
   });
 
@@ -52,7 +50,7 @@ describe('DataTableComponent', () => {
     component.nextPage();
     expect(component.currentPage()).toBe(1);
     expect(component.paginatedData().length).toBe(1); // 1 item on last page
-    
+
     component.previousPage();
     expect(component.currentPage()).toBe(0);
   });
@@ -72,7 +70,7 @@ describe('DataTableComponent', () => {
     component.toggleRowSelection('2');
     expect(component.isRowSelected('2')).toBe(true);
     expect(emitSpy).toHaveBeenCalledWith(['2']);
-    
+
     component.toggleSelectAll();
     expect(component.allSelected()).toBe(true);
   });

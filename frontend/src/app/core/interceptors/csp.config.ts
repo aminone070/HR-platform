@@ -1,6 +1,6 @@
 /**
  * Content Security Policy Configuration - Validates: Requirements 31.1
- * 
+ *
  * Defines CSP headers to prevent:
  * - XSS (Cross-Site Scripting)
  * - Clickjacking
@@ -21,7 +21,7 @@ export const CSP_DIRECTIVES: CSPDirective = {
     "'self'",
     "'unsafe-inline'", // Only for inline styles, remove in production
     'https://cdn.jsdelivr.net',
-    'https://cdnjs.cloudflare.com'
+    'https://cdnjs.cloudflare.com',
   ],
 
   // Style sources
@@ -29,43 +29,28 @@ export const CSP_DIRECTIVES: CSPDirective = {
     "'self'",
     "'unsafe-inline'", // Required for Tailwind CSS
     'https://fonts.googleapis.com',
-    'https://cdn.jsdelivr.net'
+    'https://cdn.jsdelivr.net',
   ],
 
   // Font sources
-  'font-src': [
-    "'self'",
-    'https://fonts.gstatic.com',
-    'https://cdn.jsdelivr.net',
-    'data:'
-  ],
+  'font-src': ["'self'", 'https://fonts.gstatic.com', 'https://cdn.jsdelivr.net', 'data:'],
 
   // Image sources
-  'img-src': [
-    "'self'",
-    'data:',
-    'https:',
-    'blob:'
-  ],
+  'img-src': ["'self'", 'data:', 'https:', 'blob:'],
 
   // Media sources (audio/video)
-  'media-src': [
-    "'self'",
-    'https:'
-  ],
+  'media-src': ["'self'", 'https:'],
 
   // Connect sources (XHR, WebSocket, etc.)
   'connect-src': [
     "'self'",
     'https://api.example.com',
     'wss://websocket.example.com',
-    'https://sentry.io'
+    'https://sentry.io',
   ],
 
   // Frame sources (iframes)
-  'frame-src': [
-    "'self'"
-  ],
+  'frame-src': ["'self'"],
 
   // Object sources (plugins)
   'object-src': ["'none'"],
@@ -86,7 +71,7 @@ export const CSP_DIRECTIVES: CSPDirective = {
   'block-all-mixed-content': [],
 
   // Report URI for CSP violations
-  'report-uri': ['/api/security/csp-report']
+  'report-uri': ['/api/security/csp-report'],
 };
 
 /**
@@ -113,8 +98,8 @@ export const CSP_DIRECTIVES_DEV: CSPDirective = {
     "'unsafe-inline'",
     "'unsafe-eval'", // Allow eval for development
     'https://cdn.jsdelivr.net',
-    'https://cdnjs.cloudflare.com'
-  ]
+    'https://cdnjs.cloudflare.com',
+  ],
 };
 
 /**
@@ -122,16 +107,8 @@ export const CSP_DIRECTIVES_DEV: CSPDirective = {
  */
 export const CSP_DIRECTIVES_PROD: CSPDirective = {
   ...CSP_DIRECTIVES,
-  'script-src': [
-    "'self'",
-    'https://cdn.jsdelivr.net',
-    'https://cdnjs.cloudflare.com'
-  ],
-  'style-src': [
-    "'self'",
-    'https://fonts.googleapis.com',
-    'https://cdn.jsdelivr.net'
-  ]
+  'script-src': ["'self'", 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'],
+  'style-src': ["'self'", 'https://fonts.googleapis.com', 'https://cdn.jsdelivr.net'],
 };
 
 /**

@@ -122,12 +122,7 @@ const UI_FORM_COMPONENTS = [
   DatePickerComponent,
 ];
 
-const UI_DISPLAY_COMPONENTS = [
-  CardComponent,
-  BadgeComponent,
-  IconComponent,
-  BreadcrumbComponent,
-];
+const UI_DISPLAY_COMPONENTS = [CardComponent, BadgeComponent, IconComponent, BreadcrumbComponent];
 
 const UI_COMPLEX_COMPONENTS = [
   DropdownComponent,
@@ -136,18 +131,11 @@ const UI_COMPLEX_COMPONENTS = [
   ModalComponent,
 ];
 
-const UI_DATA_COMPONENTS = [
-  DataTableComponent,
-  FilterPanelComponent,
-  SearchInputComponent,
-];
+const UI_DATA_COMPONENTS = [DataTableComponent, FilterPanelComponent, SearchInputComponent];
 
 const UI_VISUALIZATION_COMPONENTS = [ChartComponent, KPICardComponent];
 
-const UI_CONNECTION_COMPONENTS = [
-  ConnectionStatusComponent,
-  NotificationCenterComponent,
-];
+const UI_CONNECTION_COMPONENTS = [ConnectionStatusComponent, NotificationCenterComponent];
 
 const ALL_UI_COMPONENTS = [
   ...UI_FORM_COMPONENTS,
@@ -208,19 +196,7 @@ const WIDGETS = [
  * export class FeatureModule {}
  */
 @NgModule({
-  imports: [
-    CommonModule,
-    ...ALL_COMPONENTS,
-    ...PIPES,
-    ...DIRECTIVES,
-    ...WIDGETS,
-  ],
-  exports: [
-    CommonModule,
-    ...ALL_COMPONENTS,
-    ...PIPES,
-    ...DIRECTIVES,
-    ...WIDGETS,
-  ],
+  imports: [CommonModule, ...ALL_COMPONENTS, ...PIPES, ...DIRECTIVES, ...WIDGETS],
+  exports: [CommonModule, ...ALL_COMPONENTS, ...PIPES, ...DIRECTIVES, ...WIDGETS],
 })
 export class SharedModule {}

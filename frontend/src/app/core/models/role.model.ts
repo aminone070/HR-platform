@@ -3,13 +3,13 @@
  * Role-based access control (RBAC) structures
  */
 
-export type UserRole = 
-  | 'admin' 
-  | 'hr_director' 
-  | 'hr_user' 
-  | 'manager' 
-  | 'employee' 
-  | 'talent_acquisition' 
+export type UserRole =
+  | 'admin'
+  | 'hr_director'
+  | 'hr_user'
+  | 'manager'
+  | 'employee'
+  | 'talent_acquisition'
   | 'leadership';
 
 export interface Role {
@@ -40,7 +40,15 @@ export interface RolePermission {
  */
 export const FEATURE_ACCESS_MAP: Record<UserRole, string[]> = {
   admin: ['all'],
-  hr_director: ['dashboard', 'employees', 'performance', 'reports', 'turnover', 'analytics', 'admin'],
+  hr_director: [
+    'dashboard',
+    'employees',
+    'performance',
+    'reports',
+    'turnover',
+    'analytics',
+    'admin',
+  ],
   hr_user: ['dashboard', 'employees', 'performance', 'reports', 'recruitment'],
   manager: ['dashboard', 'employees', 'performance'],
   employee: ['dashboard', 'performance'],

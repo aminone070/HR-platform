@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  signal,
-  effect,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, signal, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { fadeIn, slideInUp } from '@app/shared/animations';
@@ -42,8 +35,13 @@ export interface KPIData {
   animations: [
     slideInUp,
     trigger('numberChange', [
-      transition(':enter', [style({ opacity: 0, transform: 'scale(0.8)' }), animate('300ms ease-out')]),
-      transition(':leave', [animate('300ms ease-in', style({ opacity: 0, transform: 'scale(0.8)' }))]),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.8)' }),
+        animate('300ms ease-out'),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'scale(0.8)' })),
+      ]),
     ]),
   ],
   templateUrl: './kpi-card.component.html',

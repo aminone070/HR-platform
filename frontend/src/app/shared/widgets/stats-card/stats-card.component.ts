@@ -34,60 +34,67 @@ export interface StatsCardData {
       </div>
     </div>
   `,
-  styles: [`
-    .stats-card {
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      background: white;
-      border: 1px solid #e5e7eb;
-    }
+  styles: [
+    `
+      .stats-card {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        background: white;
+        border: 1px solid #e5e7eb;
+      }
 
-    .stats-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
+      .stats-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
 
-    .stats-title {
-      margin: 0;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #6b7280;
-    }
+      .stats-title {
+        margin: 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #6b7280;
+      }
 
-    .stats-value {
-      font-size: 1.875rem;
-      font-weight: bold;
-      color: #1f2937;
-      margin-bottom: 0.5rem;
-    }
+      .stats-value {
+        font-size: 1.875rem;
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+      }
 
-    .stats-footer {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: #9ca3af;
-    }
+      .stats-footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: #9ca3af;
+      }
 
-    .change-value {
-      font-weight: 600;
-    }
+      .change-value {
+        font-weight: 600;
+      }
 
-    .change-value.positive {
-      color: #10b981;
-    }
+      .change-value.positive {
+        color: #10b981;
+      }
 
-    .change-value.negative {
-      color: #ef4444;
-    }
+      .change-value.negative {
+        color: #ef4444;
+      }
 
-    .card-primary { }
-    .card-success { }
-    .card-danger { }
-    .card-warning { }
-    .card-info { }
-  `],
+      .card-primary {
+      }
+      .card-success {
+      }
+      .card-danger {
+      }
+      .card-warning {
+      }
+      .card-info {
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatsCardComponent {

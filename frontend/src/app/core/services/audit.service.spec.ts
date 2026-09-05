@@ -15,7 +15,7 @@ describe('AuditService', () => {
     id: '1',
     username: 'testuser',
     email: 'test@example.com',
-    roles: ['admin']
+    roles: ['admin'],
   };
 
   beforeEach(() => {
@@ -23,21 +23,16 @@ describe('AuditService', () => {
     localStorage.setItem('hr_analytics_user', JSON.stringify(mockUser));
 
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-        AuthService,
-        AuditService
-      ]
+      providers: [provideHttpClient(), provideHttpClientTesting(), AuthService, AuditService],
     });
 
     service = TestBed.inject(AuditService);
     authService = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
-    
+
     // Clear any calls made during constructor (like queue processing)
     const pending = httpMock.match('/api/audit/log');
-    pending.forEach(req => req.flush({}));
+    pending.forEach((req) => req.flush({}));
   });
 
   afterEach(() => {
@@ -80,7 +75,13 @@ describe('AuditService', () => {
 
   describe('Log Failed Action', () => {
     it('should log failed action', () => {
-      service.logFailedAction('delete', 'employees', 'Failed to delete employee', 'Permission denied', 'emp-123');
+      service.logFailedAction(
+        'delete',
+        'employees',
+        'Failed to delete employee',
+        'Permission denied',
+        'emp-123',
+      );
 
       const req = httpMock.expectOne('/api/audit/log');
       const auditLog = req.request.body as AuditLog;

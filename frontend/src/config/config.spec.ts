@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 /**
  * Configuration Tests - Validates: Requirements 28.1
- * 
+ *
  * These tests verify that the project configuration is correctly set up:
  * - TypeScript strict mode is enabled
  * - Path aliases are properly configured and resolvable

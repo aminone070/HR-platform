@@ -10,9 +10,7 @@ export const PERFORMANCE_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/performance/performance.component').then(
-        (m) => m.PerformanceComponent
-      ),
+      import('./pages/performance/performance.component').then((m) => m.PerformanceComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Performance Management',

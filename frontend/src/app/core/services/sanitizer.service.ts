@@ -1,10 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 
-import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  SafeHtml,
+  SafeResourceUrl,
+  SafeScript,
+  SafeStyle,
+  SafeUrl,
+} from '@angular/platform-browser';
 
 /**
  * Input Sanitization Service - Validates: Requirements 31.1
- * 
+ *
  * Sanitizes user input to prevent:
  * - XSS (Cross-Site Scripting)
  * - HTML injection
@@ -13,10 +20,9 @@ import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl
  */
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SanitizerService {
-  
   // Regex patterns for validation
   private readonly EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private readonly URL_PATTERN = /^https?:\/\/.+/;
@@ -26,19 +32,38 @@ export class SanitizerService {
 
   // Dangerous HTML tags
   private readonly DANGEROUS_TAGS = [
-    'script', 'iframe', 'object', 'embed', 'link', 'style',
-    'form', 'input', 'button', 'textarea', 'select'
+    'script',
+    'iframe',
+    'object',
+    'embed',
+    'link',
+    'style',
+    'form',
+    'input',
+    'button',
+    'textarea',
+    'select',
   ];
 
   // Dangerous attributes
   private readonly DANGEROUS_ATTRIBUTES = [
-    'onclick', 'onload', 'onerror', 'onmouseover', 'onmouseout',
-    'onkeydown', 'onkeyup', 'onchange', 'onfocus', 'onblur',
-    'onsubmit', 'ondblclick', 'oncontextmenu', 'onwheel'
+    'onclick',
+    'onload',
+    'onerror',
+    'onmouseover',
+    'onmouseout',
+    'onkeydown',
+    'onkeyup',
+    'onchange',
+    'onfocus',
+    'onblur',
+    'onsubmit',
+    'ondblclick',
+    'oncontextmenu',
+    'onwheel',
   ];
 
   private domSanitizer = inject(DomSanitizer);
-
 
   /**
    * Sanitize HTML content
@@ -93,9 +118,9 @@ export class SanitizerService {
       '<': '&lt;',
       '>': '&gt;',
       '"': '&quot;',
-      "'": '&#039;'
+      "'": '&#039;',
     };
-    return text.replace(/[&<>"']/g, char => map[char]);
+    return text.replace(/[&<>"']/g, (char) => map[char]);
   }
 
   /**
@@ -164,18 +189,18 @@ export class SanitizerService {
    */
   sanitizeText(text: string, maxLength: number = 1000): string {
     let sanitized = text.trim();
-    
+
     // Remove null bytes
     sanitized = sanitized.replace(/\0/g, '');
-    
+
     // Remove control characters
     sanitized = sanitized.replace(/[\x00-\x1F\x7F]/g, '');
-    
+
     // Limit length
     if (sanitized.length > maxLength) {
       sanitized = sanitized.substring(0, maxLength);
     }
-    
+
     return sanitized;
   }
 
@@ -198,11 +223,11 @@ export class SanitizerService {
     if (typeof obj === 'string') {
       return this.sanitizeText(obj);
     }
-    
+
     if (Array.isArray(obj)) {
-      return obj.map(item => this.sanitizeObject(item));
+      return obj.map((item) => this.sanitizeObject(item));
     }
-    
+
     if (typeof obj === 'object' && obj !== null) {
       const sanitized: any = {};
       for (const key in obj) {
@@ -212,7 +237,7 @@ export class SanitizerService {
       }
       return sanitized;
     }
-    
+
     return obj;
   }
 
@@ -221,26 +246,26 @@ export class SanitizerService {
    */
   containsDangerousContent(text: string): boolean {
     const lowerText = text.toLowerCase();
-    
+
     // Check for dangerous tags
     for (const tag of this.DANGEROUS_TAGS) {
       if (lowerText.includes(`<${tag}`)) {
         return true;
       }
     }
-    
+
     // Check for dangerous attributes
     for (const attr of this.DANGEROUS_ATTRIBUTES) {
       if (lowerText.includes(attr)) {
         return true;
       }
     }
-    
+
     // Check for script protocols
     if (lowerText.includes('javascript:') || lowerText.includes('data:text/html')) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -257,18 +282,18 @@ export class SanitizerService {
   sanitizeFileName(fileName: string): string {
     // Remove path traversal attempts
     let sanitized = fileName.replace(/\.\.\//g, '').replace(/\.\.\\/g, '');
-    
+
     // Remove dangerous characters
     sanitized = sanitized.replace(/[<>:"|?*\x00-\x1F]/g, '');
-    
+
     // Remove leading/trailing spaces and dots
     sanitized = sanitized.replace(/^[\s.]+|[\s.]+$/g, '');
-    
+
     // Limit length
     if (sanitized.length > 255) {
       sanitized = sanitized.substring(0, 255);
     }
-    
+
     return sanitized || 'file';
   }
 
@@ -281,7 +306,7 @@ export class SanitizerService {
     sanitized = sanitized.replace(/--/g, '');
     sanitized = sanitized.replace(/\/\*/g, '');
     sanitized = sanitized.replace(/\*\//g, '');
-    
+
     return sanitized;
   }
 

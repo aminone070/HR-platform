@@ -43,16 +43,16 @@ describe('ButtonComponent', () => {
   it('should emit onClick event when clicked but not when disabled', () => {
     const emitSpy = vi.spyOn(component.onClick, 'emit');
     const buttonElement = fixture.nativeElement.querySelector('button');
-    
+
     // Normal click
     buttonElement.click();
     expect(emitSpy).toHaveBeenCalled();
-    
+
     // Disabled click
     component.disabled = true;
     fixture.detectChanges();
     emitSpy.mockClear();
-    
+
     buttonElement.click();
     expect(emitSpy).not.toHaveBeenCalled();
   });

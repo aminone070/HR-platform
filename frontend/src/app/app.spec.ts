@@ -8,8 +8,8 @@ describe('App', () => {
       imports: [App],
       providers: [
         { provide: I18nService, useValue: { language: () => 'en', isRTL: () => false } },
-        { provide: ThemeService, useValue: { theme: () => 'light', isDarkMode: () => false } }
-      ]
+        { provide: ThemeService, useValue: { theme: () => 'light', isDarkMode: () => false } },
+      ],
     }).compileComponents();
   });
 

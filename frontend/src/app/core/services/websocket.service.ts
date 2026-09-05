@@ -11,9 +11,9 @@ import { filter, map, retryWhen, delay, take } from 'rxjs/operators';
 export class WebSocketService {
   private ws: WebSocket | null = null;
   private messageSubject = new Subject<any>();
-  private connectionStatus = new BehaviorSubject<'connected' | 'disconnected' | 'reconnecting' | 'mocked'>(
-    'disconnected',
-  );
+  private connectionStatus = new BehaviorSubject<
+    'connected' | 'disconnected' | 'reconnecting' | 'mocked'
+  >('disconnected');
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 3;
   private reconnectDelay = 2000;
@@ -28,7 +28,10 @@ export class WebSocketService {
   }
 
   connect(url: string = 'ws://localhost:8080'): void {
-    if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
+    if (
+      this.ws &&
+      (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)
+    ) {
       return;
     }
 
@@ -68,7 +71,9 @@ export class WebSocketService {
 
   private attemptReconnect(url: string): void {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-      console.warn('[WebSocketService] Max reconnection attempts reached. Switching to Mock Mode for UI demonstration.');
+      console.warn(
+        '[WebSocketService] Max reconnection attempts reached. Switching to Mock Mode for UI demonstration.',
+      );
       this.startMocking();
       return;
     }
@@ -83,31 +88,31 @@ export class WebSocketService {
 
   private startMocking(): void {
     if (this.connectionStatus.value === 'mocked') return;
-    
+
     this.connectionStatus.next('mocked');
-    
+
     // Simulate real-time updates every 5 seconds
     this.mockSubscription = timer(0, 5000).subscribe(() => {
       const types = ['kpi_update', 'notification', 'chart_update'];
       const randomType = types[Math.floor(Math.random() * types.length)];
-      
-      let mockData: any = { type: randomType, timestamp: new Date().toISOString() };
-      
+
+      const mockData: any = { type: randomType, timestamp: new Date().toISOString() };
+
       if (randomType === 'kpi_update') {
         mockData.data = {
           headcount: 12000 + Math.floor(Math.random() * 50),
           turnover: (4.2 + (Math.random() * 0.4 - 0.2)).toFixed(2),
-          satisfaction: (88 + (Math.random() * 2 - 1)).toFixed(1)
+          satisfaction: (88 + (Math.random() * 2 - 1)).toFixed(1),
         };
       } else if (randomType === 'notification') {
         mockData.data = {
           id: Math.random().toString(36).substr(2, 9),
           title: 'Live Insight',
           message: 'Real-time satisfaction score updated in Engineering department.',
-          priority: 'low'
+          priority: 'low',
         };
       }
-      
+
       this.messageSubject.next(mockData);
     });
   }

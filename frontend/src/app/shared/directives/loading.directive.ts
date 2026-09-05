@@ -1,4 +1,12 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, OnChanges, SimpleChanges, inject } from '@angular/core';
+import {
+  Directive,
+  Input,
+  TemplateRef,
+  ViewContainerRef,
+  OnChanges,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 
 /**
  * Loading Directive

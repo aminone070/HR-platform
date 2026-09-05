@@ -32,13 +32,13 @@ export interface AuditLogFilter {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuditService {
   private readonly API_URL = '/api/audit';
   private readonly LOCAL_STORAGE_KEY = 'audit_logs_queue';
   private auditQueue: AuditLog[] = [];
-  
+
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 
@@ -51,7 +51,7 @@ export class AuditService {
     resource: string,
     details: string,
     resourceId?: string,
-    changes?: { before: any; after: any }
+    changes?: { before: any; after: any },
   ): void {
     const user = this.authService.getCurrentUser();
     if (!user) return;
@@ -67,7 +67,7 @@ export class AuditService {
       changes,
       ipAddress: this.getClientIpAddress(),
       userAgent: navigator.userAgent,
-      status: 'success'
+      status: 'success',
     };
 
     this.sendAuditLog(auditLog);
@@ -78,7 +78,7 @@ export class AuditService {
     resource: string,
     details: string,
     errorMessage: string,
-    resourceId?: string
+    resourceId?: string,
   ): void {
     const user = this.authService.getCurrentUser();
     if (!user) return;
@@ -94,7 +94,7 @@ export class AuditService {
       ipAddress: this.getClientIpAddress(),
       userAgent: navigator.userAgent,
       status: 'failure',
-      errorMessage
+      errorMessage,
     };
 
     this.sendAuditLog(auditLog);
@@ -107,28 +107,28 @@ export class AuditService {
   logCreate(resource: string, resourceId: string, data: any): void {
     this.logAction('create', resource, `Created ${resource}`, resourceId, {
       before: {},
-      after: data
+      after: data,
     });
   }
 
   logUpdate(resource: string, resourceId: string, before: any, after: any): void {
     this.logAction('update', resource, `Updated ${resource}`, resourceId, {
       before,
-      after
+      after,
     });
   }
 
   logDelete(resource: string, resourceId: string, data: any): void {
     this.logAction('delete', resource, `Deleted ${resource}`, resourceId, {
       before: data,
-      after: {}
+      after: {},
     });
   }
 
   logExport(resource: string, format: string, filters?: any): void {
     this.logAction('export', resource, `Exported ${resource} as ${format}`, undefined, {
       before: {},
-      after: { format, filters }
+      after: { format, filters },
     });
   }
 
@@ -143,7 +143,7 @@ export class AuditService {
       ipAddress: this.getClientIpAddress(),
       userAgent: navigator.userAgent,
       status: success ? 'success' : 'failure',
-      errorMessage
+      errorMessage,
     };
 
     this.sendAuditLog(auditLog);
@@ -162,7 +162,7 @@ export class AuditService {
       details: `User ${user.username} logged out`,
       ipAddress: this.getClientIpAddress(),
       userAgent: navigator.userAgent,
-      status: 'success'
+      status: 'success',
     };
 
     this.sendAuditLog(auditLog);
@@ -177,16 +177,20 @@ export class AuditService {
   }
 
   getResourceAuditLogs(resource: string, resourceId?: string): Observable<AuditLog[]> {
-    const url = resourceId 
+    const url = resourceId
       ? `${this.API_URL}/logs/resource/${resource}/${resourceId}`
       : `${this.API_URL}/logs/resource/${resource}`;
     return this.http.get<AuditLog[]>(url);
   }
 
   exportAuditLogs(filter?: AuditLogFilter, format: 'csv' | 'json' = 'csv'): Observable<Blob> {
-    return this.http.post(`${this.API_URL}/export`, { filter, format }, {
-      responseType: 'blob'
-    });
+    return this.http.post(
+      `${this.API_URL}/export`,
+      { filter, format },
+      {
+        responseType: 'blob',
+      },
+    );
   }
 
   private sendAuditLog(auditLog: AuditLog): void {
@@ -197,14 +201,15 @@ export class AuditService {
       error: (error) => {
         console.error('Failed to send audit log:', error);
         this.addToQueue(auditLog);
-      }
+      },
     });
   }
 
   private addToQueue(auditLog: AuditLog): void {
     // Check if duplicate
-    const isDuplicate = this.auditQueue.some(log => 
-      log.timestamp.getTime() === auditLog.timestamp.getTime() && log.userId === auditLog.userId
+    const isDuplicate = this.auditQueue.some(
+      (log) =>
+        log.timestamp.getTime() === auditLog.timestamp.getTime() && log.userId === auditLog.userId,
     );
     if (isDuplicate) return;
 
@@ -213,8 +218,10 @@ export class AuditService {
   }
 
   private removeFromQueue(auditLog: AuditLog): void {
-    this.auditQueue = this.auditQueue.filter(log => 
-      new Date(log.timestamp).getTime() !== new Date(auditLog.timestamp).getTime() || log.userId !== auditLog.userId
+    this.auditQueue = this.auditQueue.filter(
+      (log) =>
+        new Date(log.timestamp).getTime() !== new Date(auditLog.timestamp).getTime() ||
+        log.userId !== auditLog.userId,
     );
     this.saveQueueToStorage();
   }
@@ -234,7 +241,7 @@ export class AuditService {
         this.auditQueue = JSON.parse(stored);
         // Retry sending queued logs but avoid recursion if possible
         // Actually, sendAuditLog is fine here since it's initial load
-        this.auditQueue.forEach(log => this.sendAuditLog(log));
+        this.auditQueue.forEach((log) => this.sendAuditLog(log));
       }
     } catch (error) {
       console.error('Failed to load audit queue from storage:', error);

@@ -33,7 +33,7 @@ export class HighlightTextDirective implements OnChanges {
     const regex = new RegExp(this.searchTerm, 'gi');
     const highlighted = this.el.nativeElement.innerText.replace(
       regex,
-      (match: string) => `<mark>${match}</mark>`
+      (match: string) => `<mark>${match}</mark>`,
     );
     this.el.nativeElement.innerHTML = highlighted;
   }

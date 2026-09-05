@@ -15,7 +15,7 @@ import { vi } from 'vitest';
     </app-card>
   `,
   imports: [CardComponent],
-  standalone: true
+  standalone: true,
 })
 class TestHostComponent {}
 
@@ -42,15 +42,15 @@ describe('CardComponent', () => {
   });
 
   it('should create and render content slots correctly', async () => {
-    vi.advanceTimersByTime(100); 
+    vi.advanceTimersByTime(100);
     fixture.detectChanges();
-    
+
     // Check component internal state
     const cardDe = fixture.debugElement.query(By.directive(CardComponent));
     const cardInstance = cardDe.componentInstance;
     expect(cardInstance.hasHeader).toBe(true);
     expect(cardInstance.hasFooter).toBe(true);
-    
+
     fixture.detectChanges();
 
     const header = fixture.nativeElement.querySelector('.header-text');

@@ -70,7 +70,7 @@ describe('Real-Time Features Integration', () => {
 
     wsService = TestBed.inject(WebSocketService);
     store = TestBed.inject(MockStore);
-    
+
     // Spy on store.dispatch
     vi.spyOn(store, 'dispatch');
   });

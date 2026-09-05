@@ -37,72 +37,78 @@ export interface KPIData {
       </div>
     </div>
   `,
-  styles: [`
-    .kpi-widget {
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      background: white;
-      border: 1px solid #e5e7eb;
-    }
+  styles: [
+    `
+      .kpi-widget {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        background: white;
+        border: 1px solid #e5e7eb;
+      }
 
-    .kpi-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
+      .kpi-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
 
-    .kpi-title {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #6b7280;
-      margin: 0;
-    }
+      .kpi-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #6b7280;
+        margin: 0;
+      }
 
-    .kpi-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
+      .kpi-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
 
-    .kpi-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #1f2937;
-      margin: 0;
-    }
+      .kpi-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #1f2937;
+        margin: 0;
+      }
 
-    .kpi-unit {
-      font-size: 0.875rem;
-      color: #9ca3af;
-      margin-left: 0.5rem;
-    }
+      .kpi-unit {
+        font-size: 0.875rem;
+        color: #9ca3af;
+        margin-left: 0.5rem;
+      }
 
-    .kpi-trend {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
+      .kpi-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
 
-    .trend-up {
-      color: #10b981;
-    }
+      .trend-up {
+        color: #10b981;
+      }
 
-    .trend-down {
-      color: #ef4444;
-    }
+      .trend-down {
+        color: #ef4444;
+      }
 
-    .trend-neutral {
-      color: #f59e0b;
-    }
+      .trend-neutral {
+        color: #f59e0b;
+      }
 
-    .kpi-blue { }
-    .kpi-green { }
-    .kpi-red { }
-    .kpi-purple { }
-  `],
+      .kpi-blue {
+      }
+      .kpi-green {
+      }
+      .kpi-red {
+      }
+      .kpi-purple {
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KPIWidgetComponent {

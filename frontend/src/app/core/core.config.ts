@@ -23,7 +23,7 @@ export const CORE_PROVIDERS: Provider[] = [
   // Auth & Security
   AuthService,
   AuthorizationService,
-  
+
   // Core Services
   WebSocketService,
   AuditService,

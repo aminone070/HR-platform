@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 /**
  * Encryption Service - Validates: Requirements 31.1, 31.2
- * 
+ *
  * Provides AES-256 encryption/decryption for sensitive data at rest
  * Uses Web Crypto API for secure encryption without external dependencies
  */
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EncryptionService {
   private readonly ALGORITHM = 'AES-GCM';
@@ -30,12 +30,12 @@ export class EncryptionService {
           name: 'PBKDF2',
           salt: this.getSalt().buffer as ArrayBuffer,
           iterations: 100000,
-          hash: 'SHA-256'
+          hash: 'SHA-256',
         },
         keyMaterial,
         { name: this.ALGORITHM, length: this.KEY_LENGTH },
         false,
-        ['encrypt', 'decrypt']
+        ['encrypt', 'decrypt'],
       );
     } catch (error) {
       console.error('Failed to initialize encryption key:', error);
@@ -58,10 +58,10 @@ export class EncryptionService {
       const encryptedData = await window.crypto.subtle.encrypt(
         {
           name: this.ALGORITHM,
-          iv: iv
+          iv: iv,
         },
         this.encryptionKey!,
-        dataBuffer
+        dataBuffer,
       );
 
       // Combine IV and encrypted data
@@ -93,10 +93,10 @@ export class EncryptionService {
       const decryptedData = await window.crypto.subtle.decrypt(
         {
           name: this.ALGORITHM,
-          iv: iv
+          iv: iv,
         },
         this.encryptionKey!,
-        data
+        data,
       );
 
       const decoder = new TextDecoder();
@@ -113,13 +113,10 @@ export class EncryptionService {
   private async getKeyMaterial(): Promise<CryptoKey> {
     const password = this.getEncryptionPassword();
     const encoder = new TextEncoder();
-    return window.crypto.subtle.importKey(
-      'raw',
-      encoder.encode(password),
-      'PBKDF2',
-      false,
-      ['deriveBits', 'deriveKey']
-    );
+    return window.crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, [
+      'deriveBits',
+      'deriveKey',
+    ]);
   }
 
   /**

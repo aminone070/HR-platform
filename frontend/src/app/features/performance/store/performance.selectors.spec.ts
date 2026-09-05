@@ -23,9 +23,30 @@ import { describe, it, expect } from 'vitest';
 const mockState: PerformanceState = {
   ids: ['m1', 'm2', 'm3'],
   entities: {
-    m1: { id: 'm1', employeeId: 'emp-1', score: 85, reviewDate: '2023-01-01', trend: 'up', department: 'Sales' },
-    m2: { id: 'm2', employeeId: 'emp-2', score: 45, reviewDate: '2023-02-01', trend: 'stable', department: 'Engineering' },
-    m3: { id: 'm3', employeeId: 'emp-1', score: 95, reviewDate: '2023-03-01', trend: 'up', department: 'Sales' },
+    m1: {
+      id: 'm1',
+      employeeId: 'emp-1',
+      score: 85,
+      reviewDate: '2023-01-01',
+      trend: 'up',
+      department: 'Sales',
+    },
+    m2: {
+      id: 'm2',
+      employeeId: 'emp-2',
+      score: 45,
+      reviewDate: '2023-02-01',
+      trend: 'stable',
+      department: 'Engineering',
+    },
+    m3: {
+      id: 'm3',
+      employeeId: 'emp-1',
+      score: 95,
+      reviewDate: '2023-03-01',
+      trend: 'up',
+      department: 'Sales',
+    },
   },
   loading: false,
   error: null,

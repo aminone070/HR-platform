@@ -8,10 +8,7 @@ import {
 import { vi } from 'vitest';
 
 // initialize test environment
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(),
-);
+getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 // Global Mocks
 (globalThis as any).ResizeObserver = class {
@@ -64,4 +61,3 @@ vi.mock('echarts', () => ({
     trigger: vi.fn(),
   })),
 }));
-

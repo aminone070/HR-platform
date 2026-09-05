@@ -1,7 +1,7 @@
 /**
  * Shared Components Barrel Export
  * All reusable components organized by category
- * 
+ *
  * NOTE: Only components that are actually implemented are exported here.
  * Stub/planned components are commented out.
  */
@@ -60,18 +60,8 @@ export const UI_DATA_COMPONENTS = [DataTableComponent, FilterPanelComponent];
 export const UI_VISUALIZATION_COMPONENTS: any[] = [];
 export const UI_CONNECTION_COMPONENTS = [ConnectionStatusComponent];
 
-export const ALL_UI_COMPONENTS = [
-  ...UI_DATA_COMPONENTS,
-  ...UI_CONNECTION_COMPONENTS,
-];
+export const ALL_UI_COMPONENTS = [...UI_DATA_COMPONENTS, ...UI_CONNECTION_COMPONENTS];
 
-export const COMMON_COMPONENTS = [
-  LoadingSkeletonComponent,
-  ToastComponent,
-  AlertComponent,
-];
+export const COMMON_COMPONENTS = [LoadingSkeletonComponent, ToastComponent, AlertComponent];
 
-export const ALL_SHARED_COMPONENTS = [
-  ...ALL_UI_COMPONENTS,
-  ...COMMON_COMPONENTS,
-];
+export const ALL_SHARED_COMPONENTS = [...ALL_UI_COMPONENTS, ...COMMON_COMPONENTS];

@@ -12,7 +12,12 @@ import { DatePipe } from '@angular/common';
 export class DateFormatPipe implements PipeTransform {
   constructor(private datePipe: DatePipe) {}
 
-  transform(value: Date | string, format: string = 'short', timezone?: string, locale?: string): string | null {
+  transform(
+    value: Date | string,
+    format: string = 'short',
+    timezone?: string,
+    locale?: string,
+  ): string | null {
     return this.datePipe.transform(value, format, timezone, locale);
   }
 }

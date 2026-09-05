@@ -35,7 +35,7 @@ describe('EmployeeEffects', () => {
   describe('loadEmployees$', () => {
     it('should return loadEmployeesSuccess action on success', async () => {
       const completion = EmployeeActions.loadEmployeesSuccess({ employees: [] });
-      
+
       const resultPromise = firstValueFrom(employeeEffects.loadEmployees$);
       actions$.next(EmployeeActions.loadEmployees());
 
@@ -48,7 +48,7 @@ describe('EmployeeEffects', () => {
     it('should handle addEmployee action', async () => {
       const employee = { name: 'Test', role: 'Dev' } as any;
       const resultPromise = firstValueFrom(employeeEffects.addEmployee$);
-      
+
       actions$.next(EmployeeActions.addEmployee({ employee }));
 
       const result = await resultPromise;
@@ -60,7 +60,7 @@ describe('EmployeeEffects', () => {
     it('should handle updateEmployee action', async () => {
       const employee = { id: '1', name: 'Test' } as any;
       const resultPromise = firstValueFrom(employeeEffects.updateEmployee$);
-      
+
       actions$.next(EmployeeActions.updateEmployee({ employee }));
 
       const result = await resultPromise;
@@ -71,7 +71,7 @@ describe('EmployeeEffects', () => {
   describe('deleteEmployee$', () => {
     it('should handle deleteEmployee action', async () => {
       const resultPromise = firstValueFrom(employeeEffects.deleteEmployee$);
-      
+
       actions$.next(EmployeeActions.deleteEmployee({ id: '1' }));
 
       const result = await resultPromise;

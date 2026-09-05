@@ -63,9 +63,7 @@ describe('BreadcrumbComponent', () => {
     fixture.detectChanges();
 
     const spans = fixture.nativeElement.querySelectorAll('span');
-    const activeSpan = Array.from(spans).find((span: any) =>
-      span.textContent.includes('Current'),
-    );
+    const activeSpan = Array.from(spans).find((span: any) => span.textContent.includes('Current'));
     expect(activeSpan).toBeTruthy();
   });
 

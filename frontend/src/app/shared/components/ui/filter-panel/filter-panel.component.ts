@@ -49,7 +49,7 @@ export interface FilterPreset {
   standalone: true,
   imports: [CommonModule, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filter-panel.component.html'
+  templateUrl: './filter-panel.component.html',
 })
 export class FilterPanelComponent implements OnInit, OnDestroy {
   @Input() criteria: FilterCriteria = {};
@@ -84,7 +84,7 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   }
 
   toggleAdvanced(): void {
-    this.showAdvanced.update(val => !val);
+    this.showAdvanced.update((val) => !val);
   }
 
   onFilterChange(): void {

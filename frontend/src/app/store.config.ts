@@ -1,7 +1,7 @@
 /**
  * Application Store Configuration
  * Central configuration for all feature stores
- * 
+ *
  * This file manages the registration of all NgRx feature stores
  * from different features to maintain a scalable store architecture.
  */

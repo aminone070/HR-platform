@@ -89,11 +89,14 @@ describe('Concurrent Updates & Optimistic Updates', () => {
 
       // Verify all updates were dispatched
       expect(store.dispatch).toHaveBeenCalledTimes(3);
-      
+
       // Verify dispatch was called with correct actions
-      expect(store.dispatch).toHaveBeenNthCalledWith(1, expect.objectContaining({
-        type: EmployeeActions.updateEmployee.type
-      }));
+      expect(store.dispatch).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          type: EmployeeActions.updateEmployee.type,
+        }),
+      );
     });
 
     it('should maintain data consistency with multiple concurrent updates', () => {
@@ -130,7 +133,7 @@ describe('Concurrent Updates & Optimistic Updates', () => {
 
       // Both updates should be processed
       expect(store.dispatch).toHaveBeenCalledTimes(2);
-      
+
       // Verify both employees were updated
       const calls = (store.dispatch as any).mock.calls;
       expect(calls[0][0].employee.id).toBe('emp-1');
@@ -183,7 +186,7 @@ describe('Concurrent Updates & Optimistic Updates', () => {
 
       // Both updates should be dispatched (conflict resolution happens in reducer)
       expect(store.dispatch).toHaveBeenCalledTimes(2);
-      
+
       // Verify the second update was the last one dispatched
       const calls = (store.dispatch as any).mock.calls;
       expect(calls[1][0].employee.role).toBe('Principal Engineer');
@@ -209,7 +212,7 @@ describe('Concurrent Updates & Optimistic Updates', () => {
       store.dispatch(EmployeeActions.updateEmployee({ employee: update2 }));
 
       expect(store.dispatch).toHaveBeenCalledTimes(2);
-      
+
       // Verify both updates have the same employee ID
       const calls = (store.dispatch as any).mock.calls;
       expect(calls[0][0].employee.id).toBe('emp-1');

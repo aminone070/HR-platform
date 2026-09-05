@@ -22,11 +22,11 @@ describe('FilterPanelComponent', () => {
         store[key] = `${value}`;
       },
       clear: () => {
-        Object.keys(store).forEach(key => delete store[key]);
-      }
+        Object.keys(store).forEach((key) => delete store[key]);
+      },
     };
     Object.defineProperty(window, 'localStorage', {
-      value: mockLocalStorage
+      value: mockLocalStorage,
     });
 
     fixture = TestBed.createComponent(FilterPanelComponent);
@@ -42,7 +42,7 @@ describe('FilterPanelComponent', () => {
     const emitSpy = vi.spyOn(component.filterChange, 'emit');
     component.selectedDepartments.set(['Engineering']);
     component.onFilterChange();
-    
+
     expect(emitSpy).toHaveBeenCalled();
     const emittedData = emitSpy.mock.calls[0][0];
     expect(emittedData).toBeDefined();
@@ -58,14 +58,14 @@ describe('FilterPanelComponent', () => {
   it('should save to presets successfully', () => {
     // Mock the prompt
     vi.spyOn(window, 'prompt').mockReturnValue('My Preset');
-    
+
     component.selectedDepartments.set(['HR']);
     component.savePreset();
 
     expect(component.presets().length).toBe(1);
     expect(component.presets()[0].name).toBe('My Preset');
     expect(component.presets()[0].criteria.department).toEqual(['HR']);
-    
+
     // Check LS
     const ls = JSON.parse(localStorage.getItem('filterPresets') || '[]');
     expect(ls.length).toBe(1);
@@ -75,14 +75,14 @@ describe('FilterPanelComponent', () => {
   it('should load preset correctly', () => {
     const emitSpy = vi.spyOn(component.filterChange, 'emit');
     const mockPreset = {
-        id: '123',
-        name: 'Test',
-        criteria: { region: ['Europe'] },
-        createdAt: new Date().toISOString()
+      id: '123',
+      name: 'Test',
+      criteria: { region: ['Europe'] },
+      createdAt: new Date().toISOString(),
     };
 
     component.loadPreset(mockPreset);
-    
+
     expect(component.selectedRegions()).toEqual(['Europe']);
     expect(emitSpy).toHaveBeenCalledWith(mockPreset.criteria);
   });

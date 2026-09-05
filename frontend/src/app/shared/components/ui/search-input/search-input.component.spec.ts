@@ -18,7 +18,7 @@ describe('SearchInputComponent', () => {
     component.data = [
       { id: '1', name: 'Alice Smith', department: 'Engineering' },
       { id: '2', name: 'Bob Jones', department: 'HR' },
-      { id: '3', name: 'Charlie Alice', department: 'Sales' }
+      { id: '3', name: 'Charlie Alice', department: 'Sales' },
     ];
     component.searchableFields = ['name', 'department'];
     fixture.detectChanges();
@@ -34,24 +34,24 @@ describe('SearchInputComponent', () => {
 
   it('should debounce search and perform full text search', async () => {
     const emitSpy = vi.spyOn(component.search, 'emit');
-    
+
     component.onSearchChange('alice');
     // Fast forward enough for debounceTime(300)
     vi.advanceTimersByTime(300);
-    
+
     expect(emitSpy).toHaveBeenCalledTimes(1);
     const results = emitSpy.mock.calls[0][0] as SearchResult[];
     expect(results).toBeDefined();
-    expect(results.length).toBe(2); 
+    expect(results.length).toBe(2);
     // Alice Smith and Charlie Alice both match 'alice'
   });
 
   it('should handle field-specific search (field:value) directly', async () => {
     const emitSpy = vi.spyOn(component.search, 'emit');
-    
+
     component.onSearchChange('department:HR');
     vi.advanceTimersByTime(300);
-    
+
     expect(emitSpy).toHaveBeenCalledTimes(1);
     const results = emitSpy.mock.calls[0][0] as SearchResult[];
     expect(results).toBeDefined();
@@ -63,7 +63,7 @@ describe('SearchInputComponent', () => {
     const emptySpy = vi.spyOn(component.search, 'emit');
     component.searchQuery.set('Alice');
     component.clearSearch();
-    
+
     expect(component.searchQuery()).toBe('');
     expect(emptySpy).toHaveBeenCalledWith(component.data); // Emits full dataset
   });

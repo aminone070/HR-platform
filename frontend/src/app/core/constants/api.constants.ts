@@ -6,7 +6,7 @@
 export const API_CONSTANTS = {
   // Base URLs
   BASE_URL: '/api',
-  
+
   // Auth endpoints
   AUTH: {
     LOGIN: '/auth/login',

@@ -24,31 +24,37 @@ describe('DashboardLayoutComponent', () => {
   let themeMock: any;
 
   beforeEach(async () => {
-    i18nMock = { 
-        getLanguage: vi.fn().mockReturnValue('en'),
-        setLanguage: vi.fn(),
-        translate: vi.fn((k) => k),
-        isArabic: vi.fn().mockReturnValue(false)
+    i18nMock = {
+      getLanguage: vi.fn().mockReturnValue('en'),
+      setLanguage: vi.fn(),
+      translate: vi.fn((k) => k),
+      isArabic: vi.fn().mockReturnValue(false),
     };
-    
+
     themeMock = {
-        isDark: vi.fn().mockReturnValue(false),
-        toggleTheme: vi.fn()
+      isDark: vi.fn().mockReturnValue(false),
+      toggleTheme: vi.fn(),
     };
 
     await TestBed.configureTestingModule({
       imports: [DashboardLayoutComponent, RouterTestingModule],
       providers: [
         { provide: I18nService, useValue: i18nMock },
-        { provide: ThemeService, useValue: themeMock }
-      ]
+        { provide: ThemeService, useValue: themeMock },
+      ],
     })
-    .overrideComponent(DashboardLayoutComponent, {
-      set: { 
-        imports: [CommonModule, RouterTestingModule, MockBreadcrumbComponent, MockIconComponent, MockConnectionStatusComponent] 
-      }
-    })
-    .compileComponents();
+      .overrideComponent(DashboardLayoutComponent, {
+        set: {
+          imports: [
+            CommonModule,
+            RouterTestingModule,
+            MockBreadcrumbComponent,
+            MockIconComponent,
+            MockConnectionStatusComponent,
+          ],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardLayoutComponent);
     component = fixture.componentInstance;

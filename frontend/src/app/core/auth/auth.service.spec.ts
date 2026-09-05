@@ -7,7 +7,7 @@ import { AuthService, LoginRequest, LoginResponse } from './auth.service';
 
 /**
  * Authentication Service Tests - Validates: Requirements 30.1, 30.5
- * 
+ *
  * Tests verify:
  * - Login works with valid credentials
  * - Tokens are stored securely
@@ -21,21 +21,22 @@ describe('AuthService', () => {
   let router: Router;
 
   const mockLoginResponse: LoginResponse = {
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjk5OTk5OTk5OTl9.signature',
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjk5OTk5OTk5OTl9.signature',
     refreshToken: 'refresh-token-123',
     expiresIn: 3600,
     user: {
       id: '1',
       username: 'testuser',
       email: 'test@example.com',
-      roles: ['admin']
-    }
+      roles: ['admin'],
+    },
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService, Router]
+      providers: [AuthService, Router],
     });
 
     service = TestBed.inject(AuthService);
@@ -55,7 +56,7 @@ describe('AuthService', () => {
     it('should login with valid credentials', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -72,7 +73,7 @@ describe('AuthService', () => {
     it('should store token after successful login', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -82,13 +83,15 @@ describe('AuthService', () => {
 
       await loginPromise;
       expect(localStorage.getItem('hr_analytics_token')).toBe(mockLoginResponse.token);
-      expect(localStorage.getItem('hr_analytics_refresh_token')).toBe(mockLoginResponse.refreshToken);
+      expect(localStorage.getItem('hr_analytics_refresh_token')).toBe(
+        mockLoginResponse.refreshToken,
+      );
     });
 
     it('should set current user after successful login', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -106,7 +109,7 @@ describe('AuthService', () => {
     it('should handle login failure', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'wrongpassword'
+        password: 'wrongpassword',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -137,7 +140,7 @@ describe('AuthService', () => {
     it('should clear current user on logout', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -178,7 +181,7 @@ describe('AuthService', () => {
 
       const newResponse: LoginResponse = {
         ...mockLoginResponse,
-        token: 'new-token-456'
+        token: 'new-token-456',
       };
 
       const refreshPromise = firstValueFrom(service.refreshToken());
@@ -197,7 +200,7 @@ describe('AuthService', () => {
     it('should return true if authenticated', async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -217,7 +220,7 @@ describe('AuthService', () => {
     beforeEach(async () => {
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));
@@ -248,7 +251,7 @@ describe('AuthService', () => {
 
       const credentials: LoginRequest = {
         username: 'testuser',
-        password: 'password123'
+        password: 'password123',
       };
 
       const loginPromise = firstValueFrom(service.login(credentials));

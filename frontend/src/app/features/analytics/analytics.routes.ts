@@ -25,9 +25,7 @@ export const ANALYTICS_ROUTES: Routes = [
   {
     path: 'workforce',
     loadComponent: () =>
-      import('./pages/workforce/workforce.component').then(
-        (m) => m.WorkforceComponent
-      ),
+      import('./pages/workforce/workforce.component').then((m) => m.WorkforceComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Workforce Analytics',
@@ -37,9 +35,7 @@ export const ANALYTICS_ROUTES: Routes = [
   {
     path: 'turnover',
     loadComponent: () =>
-      import('./pages/turnover/turnover.component').then(
-        (m) => m.TurnoverComponent
-      ),
+      import('./pages/turnover/turnover.component').then((m) => m.TurnoverComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Turnover Analysis',

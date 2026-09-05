@@ -20,12 +20,16 @@ import { AuthService } from '../../core/auth/auth.service';
 
       <main class="mx-auto grid max-w-5xl gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
         <section class="space-y-5">
-          <article class="overflow-hidden rounded-xl border border-surface-border bg-surface-card shadow-sm">
+          <article
+            class="overflow-hidden rounded-xl border border-surface-border bg-surface-card shadow-sm"
+          >
             <div class="h-28 bg-gradient-to-r from-primary to-[#7c5cfc]"></div>
             <div class="px-5 pb-6 sm:px-6">
               <div class="-mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div class="flex items-end gap-4">
-                  <div class="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-surface-card bg-gradient-to-br from-primary to-[#7c5cfc] text-2xl font-bold text-white shadow-md">
+                  <div
+                    class="flex h-20 w-20 items-center justify-center rounded-2xl border-4 border-surface-card bg-gradient-to-br from-primary to-[#7c5cfc] text-2xl font-bold text-white shadow-md"
+                  >
                     {{ initials }}
                   </div>
                   <div class="pb-1">
@@ -38,17 +42,30 @@ import { AuthService } from '../../core/auth/auth.service';
             </div>
           </article>
 
-          <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6">
+          <article
+            class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6"
+          >
             <div class="mb-5 flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-muted text-primary">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-muted text-primary"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <circle cx="12" cy="7" r="4"></circle>
                   <path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path>
                 </svg>
               </div>
               <div>
                 <h2 class="font-semibold text-gray-900">Personal information</h2>
-                <p class="mt-1 text-sm text-gray-500">Your account information used across the workspace.</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Your account information used across the workspace.
+                </p>
               </div>
             </div>
 
@@ -58,7 +75,9 @@ import { AuthService } from '../../core/auth/auth.service';
                 <dd class="mt-1.5 text-sm font-medium text-gray-800">{{ name }}</dd>
               </div>
               <div>
-                <dt class="text-xs font-medium uppercase tracking-wide text-gray-400">Email address</dt>
+                <dt class="text-xs font-medium uppercase tracking-wide text-gray-400">
+                  Email address
+                </dt>
                 <dd class="mt-1.5 break-all text-sm font-medium text-gray-800">{{ email }}</dd>
               </div>
               <div>
@@ -66,7 +85,9 @@ import { AuthService } from '../../core/auth/auth.service';
                 <dd class="mt-1.5 text-sm font-medium text-gray-800">{{ role }}</dd>
               </div>
               <div>
-                <dt class="text-xs font-medium uppercase tracking-wide text-gray-400">Employee ID</dt>
+                <dt class="text-xs font-medium uppercase tracking-wide text-gray-400">
+                  Employee ID
+                </dt>
                 <dd class="mt-1.5 text-sm font-medium text-gray-800">{{ employeeId }}</dd>
               </div>
             </dl>
@@ -76,8 +97,17 @@ import { AuthService } from '../../core/auth/auth.service';
         <aside class="space-y-5">
           <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm">
             <div class="mb-4 flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-success-muted text-success">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-success-muted text-success"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <path d="M12 3 5 6v5c0 4.5 2.9 8.3 7 10 4.1-1.7 7-5.5 7-10V6l-7-3Z"></path>
                   <path d="m9 12 2 2 4-4"></path>
                 </svg>
@@ -100,7 +130,10 @@ import { AuthService } from '../../core/auth/auth.service';
             <p class="mt-1.5 text-sm leading-5 text-primary/75">
               Update your theme, language, notifications, and default views in Settings.
             </p>
-            <a routerLink="/settings" class="mt-4 inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-white no-underline transition hover:bg-primary-hover">
+            <a
+              routerLink="/settings"
+              class="mt-4 inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-white no-underline transition hover:bg-primary-hover"
+            >
               Open Settings
               <span class="ml-2" aria-hidden="true">→</span>
             </a>

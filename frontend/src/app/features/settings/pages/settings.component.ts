@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { I18nService, ThemeService } from '../../../core';
-import { SelectComponent, SelectOption } from '../../../shared/components/ui/select/select.component';
+import {
+  SelectComponent,
+  SelectOption,
+} from '../../../shared/components/ui/select/select.component';
 import * as PreferencesActions from '../store/preferences.actions';
 import {
   selectDefaultDashboard,
@@ -31,7 +34,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
         <p class="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary">Workspace</p>
         <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Settings & Preferences</h1>
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              Settings & Preferences
+            </h1>
             <p class="mt-2 max-w-2xl text-sm text-gray-500">
               Personalize your workspace, notifications, language, and default views.
             </p>
@@ -49,12 +54,25 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
       <main class="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
         <section class="space-y-5">
           <!-- Appearance -->
-          <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6">
+          <article
+            class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6"
+          >
             <div class="mb-5 flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-muted text-primary">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-muted text-primary"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <circle cx="12" cy="12" r="4"></circle>
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+                  <path
+                    d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"
+                  ></path>
                 </svg>
               </div>
               <div>
@@ -101,24 +119,41 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
           </article>
 
           <!-- Notifications -->
-          <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6">
+          <article
+            class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6"
+          >
             <div class="mb-5 flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-info-muted text-info">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-info-muted text-info"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path>
                 </svg>
               </div>
               <div>
                 <h2 class="font-semibold text-gray-900">Notifications</h2>
-                <p class="mt-1 text-sm text-gray-500">Control the updates you receive from the platform.</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Control the updates you receive from the platform.
+                </p>
               </div>
             </div>
 
             <div class="divide-y divide-surface-divider">
-              <label class="flex cursor-pointer items-center justify-between gap-4 py-3 first:pt-0 last:pb-0">
+              <label
+                class="flex cursor-pointer items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
+              >
                 <span>
                   <span class="block text-sm font-medium text-gray-800">Enable notifications</span>
-                  <span class="mt-1 block text-xs text-gray-500">Receive important activity and reminder updates.</span>
+                  <span class="mt-1 block text-xs text-gray-500"
+                    >Receive important activity and reminder updates.</span
+                  >
                 </span>
                 <input
                   type="checkbox"
@@ -130,7 +165,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
               <label class="flex cursor-pointer items-center justify-between gap-4 py-3">
                 <span>
                   <span class="block text-sm font-medium text-gray-800">Email notifications</span>
-                  <span class="mt-1 block text-xs text-gray-500">Get summaries and alerts in your inbox.</span>
+                  <span class="mt-1 block text-xs text-gray-500"
+                    >Get summaries and alerts in your inbox.</span
+                  >
                 </span>
                 <input
                   type="checkbox"
@@ -142,7 +179,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
               <label class="flex cursor-pointer items-center justify-between gap-4 py-3 last:pb-0">
                 <span>
                   <span class="block text-sm font-medium text-gray-800">Push notifications</span>
-                  <span class="mt-1 block text-xs text-gray-500">Keep live alerts visible while you work.</span>
+                  <span class="mt-1 block text-xs text-gray-500"
+                    >Keep live alerts visible while you work.</span
+                  >
                 </span>
                 <input
                   type="checkbox"
@@ -155,10 +194,21 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
           </article>
 
           <!-- Workspace defaults -->
-          <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6">
+          <article
+            class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm sm:p-6"
+          >
             <div class="mb-5 flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-success-muted text-success">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-success-muted text-success"
+              >
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
                   <rect x="3" y="3" width="7" height="7" rx="1"></rect>
                   <rect x="14" y="3" width="7" height="7" rx="1"></rect>
                   <rect x="3" y="14" width="7" height="7" rx="1"></rect>
@@ -167,7 +217,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
               </div>
               <div>
                 <h2 class="font-semibold text-gray-900">Workspace defaults</h2>
-                <p class="mt-1 text-sm text-gray-500">Set the first view and page size used across the app.</p>
+                <p class="mt-1 text-sm text-gray-500">
+                  Set the first view and page size used across the app.
+                </p>
               </div>
             </div>
 
@@ -193,7 +245,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
         <aside class="space-y-5">
           <article class="rounded-xl border border-surface-border bg-surface-card p-5 shadow-sm">
             <h2 class="font-semibold text-gray-900">Saved filters</h2>
-            <p class="mt-1 text-sm text-gray-500">Quick access to filters you save from analytics pages.</p>
+            <p class="mt-1 text-sm text-gray-500">
+              Quick access to filters you save from analytics pages.
+            </p>
 
             <ng-container *ngIf="savedFilters$ | async as filters">
               <div *ngIf="filters.length; else noFilters" class="mt-4 space-y-2">
@@ -203,7 +257,9 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
                 >
                   <div class="min-w-0">
                     <p class="truncate text-sm font-medium text-gray-800">{{ filter.name }}</p>
-                    <p class="mt-0.5 text-xs text-gray-400">{{ filter.createdAt | date:'mediumDate' }}</p>
+                    <p class="mt-0.5 text-xs text-gray-400">
+                      {{ filter.createdAt | date: 'mediumDate' }}
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -211,16 +267,34 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
                     class="rounded-md p-1.5 text-gray-400 transition hover:bg-error-muted hover:text-error"
                     [attr.aria-label]="'Remove ' + filter.name"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
                       <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"></path>
                     </svg>
                   </button>
                 </div>
               </div>
               <ng-template #noFilters>
-                <div class="mt-5 rounded-lg border border-dashed border-gray-200 bg-gray-50 p-5 text-center">
-                  <div class="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-400">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <div
+                  class="mt-5 rounded-lg border border-dashed border-gray-200 bg-gray-50 p-5 text-center"
+                >
+                  <div
+                    class="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-400"
+                  >
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    >
                       <path d="M4 5h16M7 12h10M10 19h4"></path>
                     </svg>
                   </div>
@@ -233,12 +307,22 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
 
           <article class="rounded-xl border border-primary/20 bg-primary-muted p-5">
             <div class="flex items-start gap-3">
-              <svg class="mt-0.5 shrink-0 text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <svg
+                class="mt-0.5 shrink-0 text-primary"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
                 <circle cx="12" cy="12" r="9"></circle>
                 <path d="M12 11v5M12 8h.01"></path>
               </svg>
               <div>
-                <h2 class="text-sm font-semibold text-primary-dark">Your preferences are private</h2>
+                <h2 class="text-sm font-semibold text-primary-dark">
+                  Your preferences are private
+                </h2>
                 <p class="mt-1 text-xs leading-5 text-primary-dark/80">
                   These settings are stored in this browser and apply to your current workspace.
                 </p>
@@ -248,7 +332,10 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
         </aside>
       </main>
 
-      <div *ngIf="preferencesError$ | async as error" class="mx-auto mt-5 max-w-6xl rounded-lg border border-error/20 bg-error-muted px-4 py-3 text-sm text-error">
+      <div
+        *ngIf="preferencesError$ | async as error"
+        class="mx-auto mt-5 max-w-6xl rounded-lg border border-error/20 bg-error-muted px-4 py-3 text-sm text-error"
+      >
         {{ error }}
       </div>
       <div *ngIf="preferencesLoading$ | async" class="mx-auto mt-4 max-w-6xl text-xs text-gray-400">

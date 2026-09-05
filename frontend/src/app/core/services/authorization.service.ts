@@ -3,7 +3,7 @@ import { AuthService } from '../auth/auth.service';
 
 /**
  * Authorization Service - Validates: Requirements 30.2, 30.3, 30.4
- * 
+ *
  * Implements Role-Based Access Control (RBAC) with:
  * - Permission checking
  * - Resource-level authorization
@@ -20,10 +20,9 @@ export interface RolePermissions {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthorizationService {
-  
   // Define role-based permissions
   private rolePermissions: RolePermissions = {
     admin: [
@@ -88,9 +87,9 @@ export class AuthorizationService {
     const user = this.authService.getCurrentUser();
     if (!user) return false;
 
-    return user.roles.some(role => {
+    return user.roles.some((role) => {
       const permissions = this.rolePermissions[role] || [];
-      return permissions.some(p => p.resource === resource && p.action === action);
+      return permissions.some((p) => p.resource === resource && p.action === action);
     });
   }
 
@@ -98,14 +97,14 @@ export class AuthorizationService {
    * Check if user can perform any of the specified actions
    */
   canAccessAny(resource: string, actions: string[]): boolean {
-    return actions.some(action => this.canAccess(resource, action));
+    return actions.some((action) => this.canAccess(resource, action));
   }
 
   /**
    * Check if user can perform all specified actions
    */
   canAccessAll(resource: string, actions: string[]): boolean {
-    return actions.every(action => this.canAccess(resource, action));
+    return actions.every((action) => this.canAccess(resource, action));
   }
 
   /**
@@ -151,13 +150,13 @@ export class AuthorizationService {
     if (!user) return [];
 
     const permissions: Permission[] = [];
-    user.roles.forEach(role => {
+    user.roles.forEach((role) => {
       const rolePerms = this.rolePermissions[role] || [];
       permissions.push(...rolePerms);
     });
 
     // Remove duplicates
-    return Array.from(new Map(permissions.map(p => [`${p.resource}:${p.action}`, p])).values());
+    return Array.from(new Map(permissions.map((p) => [`${p.resource}:${p.action}`, p])).values());
   }
 
   /**

@@ -87,7 +87,7 @@ export class ReportService {
 
   constructor() {}
 
-   /**
+  /**
    * Generate PDF report
    */
   generatePDF(config: ReportConfig): void {
@@ -99,7 +99,7 @@ export class ReportService {
 
     const isAr = config.language === 'ar';
     const t = this.translations[config.language];
-    
+
     // Setup font for Arabic
     if (isAr) {
       doc.addFileToVFS('Amiri-Regular.ttf', AMIRI_FONT_BASE64);
@@ -114,7 +114,7 @@ export class ReportService {
     // Title
     doc.setFontSize(20);
     if (!isAr) doc.setFont('helvetica', 'bold');
-    
+
     const title = isAr ? this.prepareArabicText(config.title) : config.title;
     doc.text(title, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 10;
@@ -123,7 +123,7 @@ export class ReportService {
     if (config.subtitle) {
       doc.setFontSize(12);
       if (!isAr) doc.setFont('helvetica', 'normal');
-      
+
       const subtitle = isAr ? this.prepareArabicText(config.subtitle) : config.subtitle;
       doc.text(subtitle, pageWidth / 2, yPosition, { align: 'center' });
       yPosition += 8;
@@ -132,37 +132,40 @@ export class ReportService {
     // Generated date
     doc.setFontSize(10);
     if (!isAr) doc.setFont('helvetica', 'italic');
-    
-    const generatedDateStr = new Date().toLocaleDateString(
-      isAr ? 'ar-SA' : 'en-US',
-    );
-    const dateText = isAr 
+
+    const generatedDateStr = new Date().toLocaleDateString(isAr ? 'ar-SA' : 'en-US');
+    const dateText = isAr
       ? this.prepareArabicText(`${t.generatedOn}: ${generatedDateStr}`)
       : `${t.generatedOn}: ${generatedDateStr}`;
-      
-    doc.text(dateText, isAr ? pageWidth - margin : margin, yPosition, { align: isAr ? 'right' : 'left' });
+
+    doc.text(dateText, isAr ? pageWidth - margin : margin, yPosition, {
+      align: isAr ? 'right' : 'left',
+    });
     yPosition += 8;
 
     // Date range
     if (!isAr) doc.setFont('helvetica', 'normal');
-    const startDate = config.dateRange.startDate.toLocaleDateString(
-      isAr ? 'ar-SA' : 'en-US',
-    );
-    const endDate = config.dateRange.endDate.toLocaleDateString(
-      isAr ? 'ar-SA' : 'en-US',
-    );
-    
+    const startDate = config.dateRange.startDate.toLocaleDateString(isAr ? 'ar-SA' : 'en-US');
+    const endDate = config.dateRange.endDate.toLocaleDateString(isAr ? 'ar-SA' : 'en-US');
+
     const rangeText = isAr
       ? this.prepareArabicText(`${t.dateRange}: ${t.from} ${startDate} ${t.to} ${endDate}`)
       : `${t.dateRange}: ${t.from} ${startDate} ${t.to} ${endDate}`;
-      
-    doc.text(rangeText, isAr ? pageWidth - margin : margin, yPosition, { align: isAr ? 'right' : 'left' });
+
+    doc.text(rangeText, isAr ? pageWidth - margin : margin, yPosition, {
+      align: isAr ? 'right' : 'left',
+    });
     yPosition += 12;
 
     // Metrics section
     doc.setFontSize(14);
     if (!isAr) doc.setFont('helvetica', 'bold');
-    doc.text(isAr ? this.prepareArabicText(t.metrics) : t.metrics, isAr ? pageWidth - margin : margin, yPosition, { align: isAr ? 'right' : 'left' });
+    doc.text(
+      isAr ? this.prepareArabicText(t.metrics) : t.metrics,
+      isAr ? pageWidth - margin : margin,
+      yPosition,
+      { align: isAr ? 'right' : 'left' },
+    );
     yPosition += 8;
 
     // Metrics table
@@ -179,8 +182,10 @@ export class ReportService {
 
     if (isAr) {
       // Reshape Arabic text in table
-      tableHead = tableHead.map(text => this.prepareArabicText(text)).reverse();
-      tableData = tableData.map(row => row.map(cell => this.prepareArabicText(String(cell))).reverse());
+      tableHead = tableHead.map((text) => this.prepareArabicText(text)).reverse();
+      tableData = tableData.map((row) =>
+        row.map((cell) => this.prepareArabicText(String(cell))).reverse(),
+      );
     }
 
     (doc as any).autoTable({
@@ -201,13 +206,8 @@ export class ReportService {
         const footerText = isAr
           ? this.prepareArabicText(`${t.page} ${data.pageNumber} ${t.of} ${pageCount}`)
           : `${t.page} ${data.pageNumber} ${t.of} ${pageCount}`;
-          
-        doc.text(
-          footerText,
-          pageSize.getWidth() / 2,
-          footerY,
-          { align: 'center' },
-        );
+
+        doc.text(footerText, pageSize.getWidth() / 2, footerY, { align: 'center' });
       },
     });
 
@@ -217,7 +217,12 @@ export class ReportService {
 
       doc.setFontSize(14);
       if (!isAr) doc.setFont('helvetica', 'bold');
-      doc.text(isAr ? this.prepareArabicText(t.filters) : t.filters, isAr ? pageWidth - margin : margin, yPosition, { align: isAr ? 'right' : 'left' });
+      doc.text(
+        isAr ? this.prepareArabicText(t.filters) : t.filters,
+        isAr ? pageWidth - margin : margin,
+        yPosition,
+        { align: isAr ? 'right' : 'left' },
+      );
       yPosition += 8;
 
       doc.setFontSize(10);
@@ -225,10 +230,12 @@ export class ReportService {
 
       let filterHead = ['Filter', 'Value'];
       let filterData = Object.entries(config.filters).map(([key, value]) => [key, String(value)]);
-      
+
       if (isAr) {
-        filterHead = filterHead.map(text => this.prepareArabicText(text)).reverse();
-        filterData = filterData.map(row => row.map(cell => this.prepareArabicText(String(cell))).reverse());
+        filterHead = filterHead.map((text) => this.prepareArabicText(text)).reverse();
+        filterData = filterData.map((row) =>
+          row.map((cell) => this.prepareArabicText(String(cell))).reverse(),
+        );
       }
 
       (doc as any).autoTable({

@@ -17,10 +17,7 @@ describe('AuthorizationGuardService', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [
-        AuthorizationGuardService,
-        { provide: Router, useValue: mockRouter },
-      ],
+      providers: [AuthorizationGuardService, { provide: Router, useValue: mockRouter }],
     });
     service = TestBed.inject(AuthorizationGuardService);
   });
@@ -31,7 +28,7 @@ describe('AuthorizationGuardService', () => {
 
   it('should allow activation when no roles are required', () => {
     const mockRoute = {
-      data: {}
+      data: {},
     } as unknown as ActivatedRouteSnapshot;
 
     expect(service.canActivate(mockRoute)).toBe(true);
@@ -40,7 +37,7 @@ describe('AuthorizationGuardService', () => {
 
   it('should allow activation when user has required roles', () => {
     const mockRoute = {
-      data: { roles: ['ADMIN'] }
+      data: { roles: ['ADMIN'] },
     } as unknown as ActivatedRouteSnapshot;
 
     // Currently hardcoded to true in the implementation

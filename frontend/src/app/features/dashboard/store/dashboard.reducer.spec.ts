@@ -83,13 +83,13 @@ describe('dashboardReducer', () => {
         initialDashboardState,
         DashboardActions.createDashboardConfig({ config: mockConfig }),
       );
-      
+
       const updatedConfig = { ...mockConfig, name: 'Updated Name' };
       const state = dashboardReducer(
         initial,
         DashboardActions.updateDashboardConfig({ config: updatedConfig }),
       );
-      
+
       expect(state.configs['config-1'].name).toBe('Updated Name');
       expect(state.configIds).toHaveLength(1);
     });
@@ -105,12 +105,12 @@ describe('dashboardReducer', () => {
         state,
         DashboardActions.selectDashboardConfig({ configId: 'config-1' }),
       );
-      
+
       state = dashboardReducer(
         state,
         DashboardActions.deleteDashboardConfig({ configId: 'config-1' }),
       );
-      
+
       expect(state.configs['config-1']).toBeUndefined();
       expect(state.configIds).not.toContain('config-1');
       expect(state.currentConfigId).toBeNull();

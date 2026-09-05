@@ -9,8 +9,7 @@ import { authGuard, authorizationGuard } from '../../core';
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/admin.component').then((m) => m.AdminComponent),
+    loadComponent: () => import('./pages/admin.component').then((m) => m.AdminComponent),
     canActivate: [authGuard, authorizationGuard],
     data: {
       title: 'Admin Panel',

@@ -158,7 +158,10 @@ describe('employeeReducer', () => {
         initialEmployeeState,
         EmployeeActions.addEmployee({ employee: mockEmployee1 }),
       );
-      const state = employeeReducer(initial, EmployeeActions.deleteEmployee({ id: 'non-existent' }));
+      const state = employeeReducer(
+        initial,
+        EmployeeActions.deleteEmployee({ id: 'non-existent' }),
+      );
       expect(state.ids).toHaveLength(1);
     });
   });

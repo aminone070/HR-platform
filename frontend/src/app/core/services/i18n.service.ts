@@ -62,7 +62,9 @@ export class I18nService {
 
   private async loadTranslations(language: Language): Promise<void> {
     try {
-      const data = await firstValueFrom(this.http.get(`assets/i18n/${language.toLowerCase()}.json`));
+      const data = await firstValueFrom(
+        this.http.get(`assets/i18n/${language.toLowerCase()}.json`),
+      );
       this.translations.set(data as Record<string, any>);
     } catch (error) {
       console.error(`[I18nService] Failed to load translations for ${language}:`, error);

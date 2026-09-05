@@ -42,14 +42,14 @@ describe('InputComponent', () => {
     fixture.detectChanges();
     const inputEl = fixture.nativeElement.querySelector('input');
     let emittedValue = '';
-    component.valueChange.subscribe(val => emittedValue = val);
-    
+    component.valueChange.subscribe((val) => (emittedValue = val));
+
     const onChangeSpy = vi.fn();
     component.registerOnChange(onChangeSpy);
-    
+
     inputEl.value = 'test';
     inputEl.dispatchEvent(new Event('input'));
-    
+
     expect(emittedValue).toBe('test');
     expect(component.value).toBe('test');
     expect(onChangeSpy).toHaveBeenCalledWith('test');
@@ -60,7 +60,7 @@ describe('InputComponent', () => {
     component.onTouched = vi.fn(); // Mocking it here as a spy
     component.onBlur(); // sets touched to true
     fixture.detectChanges();
-    
+
     const inputEl = fixture.nativeElement.querySelector('input');
     expect(component.onTouched).toHaveBeenCalled();
     const errorEl = fixture.nativeElement.querySelector('p.text-red-600');

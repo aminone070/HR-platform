@@ -9,10 +9,7 @@ import { authGuard } from '../../core';
 export const SETTINGS_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/settings.component').then(
-        (m) => m.SettingsComponent
-      ),
+    loadComponent: () => import('./pages/settings.component').then((m) => m.SettingsComponent),
     canActivate: [authGuard],
     data: {
       title: 'Settings',

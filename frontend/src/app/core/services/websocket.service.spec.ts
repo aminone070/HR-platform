@@ -25,10 +25,10 @@ describe('WebSocketService', () => {
 
     // Mock WebSocket constructor with static properties
     // Use regular function to support 'new'
-    const MockWS = vi.fn(function(this: any) {
+    const MockWS = vi.fn(function (this: any) {
       return mockWebSocket;
     }) as any;
-    
+
     MockWS.CONNECTING = 0;
     MockWS.OPEN = 1;
     MockWS.CLOSING = 2;
@@ -41,7 +41,7 @@ describe('WebSocketService', () => {
     });
 
     service = TestBed.inject(WebSocketService);
-    
+
     // Trigger onopen manually because service connects in constructor
     if (mockWebSocket.onopen) {
       mockWebSocket.onopen();
@@ -73,7 +73,7 @@ describe('WebSocketService', () => {
     it('should propagate messages to all subscribers immediately', () => {
       const messages1: any[] = [];
       const testMessage = { type: 'employee', data: { id: '1', name: 'John' } };
-      
+
       service.messages$.subscribe((msg) => messages1.push(msg));
       mockWebSocket.onmessage({ data: JSON.stringify(testMessage) });
 
@@ -94,7 +94,7 @@ describe('WebSocketService', () => {
     it('should not send messages when disconnected', () => {
       vi.clearAllMocks();
       mockWebSocket.readyState = 3; // CLOSED
-      
+
       const testData = { type: 'test', data: 'hello' };
       service.send(testData);
 

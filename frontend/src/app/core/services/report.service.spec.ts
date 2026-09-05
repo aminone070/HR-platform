@@ -8,7 +8,7 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
  */
 describe('ReportService', () => {
   let service: ReportService;
-  
+
   // Mock external libraries
   let mockJsPDF: any;
   let mockXLSX: any;
@@ -39,13 +39,13 @@ describe('ReportService', () => {
   it('should provide available export formats', () => {
     const formats = service.getAvailableFormats();
     expect(formats).toHaveLength(3);
-    expect(formats.map(f => f.id)).toEqual(['pdf', 'csv', 'excel']);
+    expect(formats.map((f) => f.id)).toEqual(['pdf', 'csv', 'excel']);
   });
 
   it('should provide available export languages', () => {
     const languages = service.getAvailableLanguages();
     expect(languages).toHaveLength(2);
-    expect(languages.map(l => l.id)).toEqual(['en', 'ar']);
+    expect(languages.map((l) => l.id)).toEqual(['en', 'ar']);
   });
 
   describe('generateCSV', () => {
@@ -54,9 +54,7 @@ describe('ReportService', () => {
         title: 'Test CSV Report',
         language: 'en',
         dateRange: { startDate: new Date('2023-01-01'), endDate: new Date('2023-12-31') },
-        metrics: [
-          { name: 'Headcount', value: 100, unit: 'employees' }
-        ]
+        metrics: [{ name: 'Headcount', value: 100, unit: 'employees' }],
       };
 
       service.generateCSV(config);
@@ -77,9 +75,10 @@ describe('ReportService', () => {
       const pdfSpy = vi.spyOn(service, 'generatePDF').mockImplementation(() => {});
 
       const baseConfig: ReportConfig = {
-        title: 'Route Test', language: 'en',
+        title: 'Route Test',
+        language: 'en',
         dateRange: { startDate: new Date(), endDate: new Date() },
-        metrics: []
+        metrics: [],
       };
 
       service.generateReport(baseConfig, 'csv');

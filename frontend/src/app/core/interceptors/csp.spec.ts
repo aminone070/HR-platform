@@ -1,9 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { CSP_DIRECTIVES, CSP_DIRECTIVES_DEV, CSP_DIRECTIVES_PROD, generateCSPHeader, getCSPDirectives } from './csp.config';
+import {
+  CSP_DIRECTIVES,
+  CSP_DIRECTIVES_DEV,
+  CSP_DIRECTIVES_PROD,
+  generateCSPHeader,
+  getCSPDirectives,
+} from './csp.config';
 
 /**
  * Content Security Policy Tests - Validates: Requirements 31.1
- * 
+ *
  * Tests verify:
  * - CSP headers are properly configured
  * - CSP prevents XSS attacks
@@ -91,7 +97,7 @@ describe('Content Security Policy', () => {
 
     it('should use semicolon as separator', () => {
       const header = generateCSPHeader();
-      const directives = header.split(';').filter(d => d.trim());
+      const directives = header.split(';').filter((d) => d.trim());
       expect(directives.length).toBeGreaterThan(0);
     });
 

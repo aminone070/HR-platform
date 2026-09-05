@@ -14,10 +14,12 @@ export class ExportUtil {
     const csv = [
       headers.join(','),
       ...data.map((row) =>
-        headers.map((header) => {
-          const value = row[header];
-          return typeof value === 'string' && value.includes(',') ? `"${value}"` : value;
-        }).join(',')
+        headers
+          .map((header) => {
+            const value = row[header];
+            return typeof value === 'string' && value.includes(',') ? `"${value}"` : value;
+          })
+          .join(','),
       ),
     ].join('\n');
 

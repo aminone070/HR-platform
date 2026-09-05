@@ -6,7 +6,7 @@ import { AuthorizationService } from './authorization.service';
 
 /**
  * Authorization Service Tests
- * 
+ *
  * Validates: Requirements 30.2, 30.3, 30.4
  */
 describe('AuthorizationService', () => {
@@ -16,15 +16,12 @@ describe('AuthorizationService', () => {
   beforeEach(() => {
     mockAuthService = {
       getCurrentUser: vi.fn(),
-      hasRole: vi.fn()
+      hasRole: vi.fn(),
     };
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        AuthorizationService,
-        { provide: AuthService, useValue: mockAuthService }
-      ]
+      providers: [AuthorizationService, { provide: AuthService, useValue: mockAuthService }],
     });
 
     service = TestBed.inject(AuthorizationService);
@@ -33,7 +30,7 @@ describe('AuthorizationService', () => {
   describe('Admin Role', () => {
     beforeEach(() => {
       const adminUser = {
-        roles: ['admin']
+        roles: ['admin'],
       };
       mockAuthService.getCurrentUser.mockReturnValue(adminUser);
       mockAuthService.hasRole.mockImplementation((role: string) => role === 'admin');

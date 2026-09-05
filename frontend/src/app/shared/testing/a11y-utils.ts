@@ -13,7 +13,7 @@ import { ComponentFixture } from '@angular/core/testing';
 export async function checkA11y(fixture: ComponentFixture<any>): Promise<void> {
   // Placeholder for a11y testing utility
   // In production, integrate with @axe-core/angular or similar tool
-  
+
   if (!fixture.nativeElement) {
     throw new Error('Invalid fixture: no native element found');
   }
@@ -30,7 +30,7 @@ export async function checkA11y(fixture: ComponentFixture<any>): Promise<void> {
  */
 export function checkKeyboardNavigation(element: HTMLElement): boolean {
   const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
   return focusableElements.length > 0;
 }
@@ -41,16 +41,16 @@ export function checkKeyboardNavigation(element: HTMLElement): boolean {
 export function checkAriaLabels(element: HTMLElement): string[] {
   const elementsWithoutLabels: string[] = [];
   const interactiveElements = element.querySelectorAll('button, [role="button"], input');
-  
+
   interactiveElements.forEach((el) => {
     const hasAriaLabel = el.getAttribute('aria-label') || el.getAttribute('aria-labelledby');
     const hasTextContent = el.textContent?.trim().length || 0 > 0;
-    
+
     if (!hasAriaLabel && !hasTextContent) {
       elementsWithoutLabels.push(el.tagName.toLowerCase());
     }
   });
-  
+
   return elementsWithoutLabels;
 }
 

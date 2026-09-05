@@ -41,8 +41,8 @@ export class StorageUtil {
   static clear(useSession = false): void {
     try {
       const storage = useSession ? sessionStorage : localStorage;
-      const keys = Object.keys(storage).filter(key => key.startsWith(this.prefix));
-      keys.forEach(key => storage.removeItem(key));
+      const keys = Object.keys(storage).filter((key) => key.startsWith(this.prefix));
+      keys.forEach((key) => storage.removeItem(key));
     } catch (error) {
       console.error('Storage error:', error);
     }

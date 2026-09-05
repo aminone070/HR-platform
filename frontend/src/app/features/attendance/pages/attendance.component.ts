@@ -36,7 +36,7 @@ import { CommonModule } from '@angular/common';
     </div>
   </div>
 
-  <div class="grid gap-4 xl:grid-cols-2">
+  <div class="grid items-start gap-4 xl:grid-cols-2">
     <!-- Left column: Calendar + Table -->
     <div class="flex flex-col gap-4 max-md:gap-3">
       <!-- Attendance heat calendar -->
@@ -108,9 +108,9 @@ import { CommonModule } from '@angular/common';
     </div>
 
     <!-- Right column: Side cards (Absence Reasons + Late Arrivals) -->
-    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+    <div class="grid items-start gap-4 sm:grid-cols-2 xl:grid-cols-2">
       <!-- Absence reasons -->
-      <div class="card-3d">
+      <div class="card-3d self-start">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3">
           <div>
             <div class="text-sm font-semibold text-gray-900 max-md:text-[13px]">Absence Reasons</div>
@@ -133,7 +133,7 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <!-- Late arrivals trend -->
-      <div class="card-3d">
+      <div class="card-3d self-start">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-divider px-5 pb-3 pt-4 max-md:px-4 max-md:pb-2.5 max-md:pt-3">
           <div>
             <div class="text-sm font-semibold text-gray-900 max-md:text-[13px]">Late Arrivals</div>

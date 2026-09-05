@@ -36,8 +36,7 @@ export interface SortState {
   imports: [CommonModule, ScrollingModule, FormsModule, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeIn, slideInUp],
-  templateUrl: './data-table.component.html',
-  styleUrl: './data-table.component.css'
+  templateUrl: './data-table.component.html'
 })
 export class DataTableComponent implements OnInit, OnDestroy {
   @Input() title = 'Data Table';

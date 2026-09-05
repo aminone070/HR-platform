@@ -49,8 +49,7 @@ export interface FilterPreset {
   standalone: true,
   imports: [CommonModule, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filter-panel.component.html',
-  styleUrl: './filter-panel.component.css'
+  templateUrl: './filter-panel.component.html'
 })
 export class FilterPanelComponent implements OnInit, OnDestroy {
   @Input() criteria: FilterCriteria = {};

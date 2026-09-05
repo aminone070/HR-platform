@@ -1,6 +1,6 @@
 <!-- Root -->
 <div
-  class="layout-root"
+  class="relative flex h-screen overflow-hidden bg-surface-bg"
   [class.dark]="themeService.isDarkMode()"
   [dir]="i18nService.isArabic() ? 'rtl' : 'ltr'"
 >
@@ -9,21 +9,17 @@
   <div
     *ngIf="isSidebarOpen()"
     [@fadeIn]
-    class="layout-overlay"
+    class="fixed inset-0 z-[99] hidden bg-black/45 backdrop-blur-sm max-md:block"
     (click)="isSidebarOpen.set(false)"
   ></div>
 
   <!-- ═══════════════════════════ SIDEBAR ═══════════════════════════ -->
   <aside
-    class="sidebar"
-    [class.sidebar-open]="isSidebarOpen()"
-    [class.sidebar-closed-ltr]="!isSidebarOpen() && !i18nService.isArabic()"
-    [class.sidebar-closed-rtl]="!isSidebarOpen() && i18nService.isArabic()"
-    [class.sidebar-collapsed]="isSidebarCollapsed()"
+    class="z-[100] flex w-[240px] shrink-0 flex-col overflow-x-hidden overflow-y-auto rounded-r-xl border-r border-sidebar-border bg-sidebar-bg shadow-[inset_-1px_0_0_var(--sidebar-border)] transition-[width,transform] duration-300 ease-out rtl:ml-3 rtl:mr-0 rtl:rounded-l-xl rtl:rounded-r-none rtl:border-l rtl:border-r-0 rtl:shadow-[inset_1px_0_0_var(--sidebar-border)] md:max-lg:w-[70px] md:max-lg:rounded-xl md:max-lg:mx-0 max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:m-0 max-md:h-screen max-md:rounded-r-xl max-md:rtl:left-auto max-md:rtl:right-0 max-md:rtl:rounded-l-xl max-md:rtl:rounded-r-none lg:static lg:translate-x-0"
   >
     <!-- Brand -->
-    <div class="sidebar-brand">
-      <div class="sidebar-logo">
+    <div class="flex shrink-0 items-center gap-2.5 rounded-tr-[10px] border-b border-sidebar-border bg-white/[0.02] px-3 py-3.5 rtl:rounded-tl-[10px] rtl:rounded-tr-none md:max-lg:justify-center">
+      <div class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-[#4f6ef7] to-[#7c5cfc] text-white shadow-[0_2px_8px_rgba(79,110,247,0.4),inset_0_1px_0_rgba(255,255,255,0.15)] md:max-lg:h-[38px] md:max-lg:w-[38px]">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <rect x="2" y="3" width="9" height="9" rx="2" fill="currentColor" opacity="0.9"/>
           <rect x="13" y="3" width="9" height="9" rx="2" fill="currentColor" opacity="0.55"/>
@@ -31,12 +27,12 @@
           <rect x="13" y="14" width="9" height="7" rx="2" fill="currentColor" opacity="0.9"/>
         </svg>
       </div>
-      <div class="sidebar-brand-text">
-        <span class="sidebar-brand-name">HR Analytics</span>
-        <span class="sidebar-brand-sub">Platform</span>
+      <div class="flex min-w-0 flex-1 flex-col md:max-lg:hidden">
+        <span class="overflow-hidden text-ellipsis whitespace-nowrap text-[13px] font-bold tracking-[-0.01em] text-white">HR Analytics</span>
+        <span class="text-[10px] font-medium uppercase tracking-[0.08em] text-white/35">Platform</span>
       </div>
       <button
-        class="sidebar-close-btn"
+        class="hidden shrink-0 cursor-pointer rounded-md p-1 text-white/40 transition-colors hover:bg-white/[0.08] hover:text-white max-md:flex"
         (click)="isSidebarOpen.set(false)"
         aria-label="Close sidebar"
       >
@@ -47,76 +43,76 @@
     </div>
 
     <!-- Nav section label -->
-    <div class="sidebar-section-label">Navigation</div>
+    <div class="shrink-0 px-4 pt-4 pb-1 text-[9.5px] font-semibold uppercase tracking-[0.09em] text-white/25 md:max-lg:hidden">Navigation</div>
 
     <!-- Nav Links -->
-    <nav class="sidebar-nav">
+    <nav class="mx-2.5 my-2 flex flex-1 flex-col gap-0.5 rounded-[10px] bg-white/[0.01] px-2.5 py-2 md:max-lg:mx-2 md:max-lg:px-2">
       <a
         *ngFor="let link of navLinks"
         [routerLink]="link.path"
-        routerLinkActive="nav-active"
-        class="nav-item"
+        routerLinkActive="bg-sidebar-active text-white [&_.nav-pip]:opacity-100 [&_.nav-icon]:text-sidebar-accent"
+        class="group relative flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-0 bg-transparent px-2.5 py-2 text-left text-[13.5px] font-medium text-sidebar-text no-underline transition-all duration-150 hover:bg-sidebar-hover hover:text-white/85 rtl:text-right md:max-lg:justify-center md:max-lg:p-3 max-md:justify-start max-md:px-2.5 max-md:py-2"
         [attr.data-tooltip]="link.label"
         (click)="onNavItemClick()"
       >
-        <span class="nav-icon" [innerHTML]="link.icon"></span>
-        <span class="nav-label">{{ i18nService.translate(link.labelKey) || link.label }}</span>
-        <span class="nav-pip"></span>
+        <span class="nav-icon flex h-[18px] w-[18px] shrink-0 items-center justify-center text-white/40 transition-colors duration-150" [innerHTML]="link.icon"></span>
+        <span class="flex-1 md:max-lg:hidden max-md:block">{{ i18nService.translate(link.labelKey) || link.label }}</span>
+        <span class="nav-pip absolute inset-y-0 -left-2.5 w-[3px] rounded-r-sm bg-sidebar-accent opacity-0 rtl:left-auto rtl:right-[-10px] rtl:rounded-l-sm rtl:rounded-r-none"></span>
       </a>
     </nav>
 
     <!-- Bottom section label -->
-    <div class="sidebar-section-label">System</div>
+    <div class="shrink-0 px-4 pt-4 pb-1 text-[9.5px] font-semibold uppercase tracking-[0.09em] text-white/25 md:max-lg:hidden">System</div>
 
     <!-- Footer Links -->
-    <div class="sidebar-footer">
+    <div class="mx-2.5 my-2 flex shrink-0 flex-col gap-0.5 rounded-[10px] bg-white/[0.01] px-2.5 py-2 md:max-lg:mx-2 md:max-lg:px-2">
       <a
         routerLink="/settings"
-        routerLinkActive="nav-active"
-        class="nav-item"
+        routerLinkActive="bg-sidebar-active text-white [&_.nav-pip]:opacity-100 [&_.nav-icon]:text-sidebar-accent"
+        class="group relative flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-0 bg-transparent px-2.5 py-2 text-left text-[13.5px] font-medium text-sidebar-text no-underline transition-all duration-150 hover:bg-sidebar-hover hover:text-white/85 rtl:text-right md:max-lg:justify-center md:max-lg:p-3 max-md:justify-start max-md:px-2.5 max-md:py-2"
         [attr.data-tooltip]="'Settings'"
         (click)="onNavItemClick()"
       >
-        <span class="nav-icon">
+        <span class="nav-icon flex h-[18px] w-[18px] shrink-0 items-center justify-center text-white/40 transition-colors duration-150">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
             <circle cx="12" cy="12" r="3"/>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
           </svg>
         </span>
-        <span class="nav-label">Settings</span>
-        <span class="nav-pip"></span>
+        <span class="flex-1 md:max-lg:hidden max-md:block">Settings</span>
+        <span class="nav-pip absolute inset-y-0 -left-2.5 w-[3px] rounded-r-sm bg-sidebar-accent opacity-0 rtl:left-auto rtl:right-[-10px] rtl:rounded-l-sm rtl:rounded-r-none"></span>
       </a>
 
-      <button class="nav-item nav-logout" (click)="logout(); onNavItemClick()" [attr.data-tooltip]="'Logout'">
-        <span class="nav-icon">
+      <button class="group relative flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-0 bg-transparent px-2.5 py-2 text-left text-[13.5px] font-medium text-sidebar-text no-underline transition-all duration-150 hover:bg-red-500/10 hover:text-red-400 rtl:text-right md:max-lg:justify-center md:max-lg:p-3 max-md:justify-start max-md:px-2.5 max-md:py-2" (click)="logout(); onNavItemClick()" [attr.data-tooltip]="'Logout'">
+        <span class="nav-icon flex h-[18px] w-[18px] shrink-0 items-center justify-center text-white/40 transition-colors duration-150">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
             <polyline points="16 17 21 12 16 7"/>
             <line x1="21" y1="12" x2="9" y2="12"/>
           </svg>
         </span>
-        <span class="nav-label">Logout</span>
+        <span class="flex-1 md:max-lg:hidden max-md:block">Logout</span>
       </button>
     </div>
 
     <!-- User Card -->
-    <div class="sidebar-user" [title]="!isSidebarCollapsed() ? '' : (currentUser()?.name || 'User')">
-      <div class="sidebar-user-avatar">{{ (currentUser()?.name || 'U')[0] }}</div>
-      <div class="sidebar-user-info">
-        <span class="sidebar-user-name">{{ currentUser()?.name || 'User' }}</span>
-        <span class="sidebar-user-role">{{ currentUser()?.role || 'Member' }}</span>
+    <div class="mx-2.5 my-2 flex shrink-0 items-center gap-2.5 rounded-[10px] border border-white/[0.07] bg-white/[0.04] px-3.5 py-3 transition-colors hover:bg-white/[0.08] md:max-lg:mx-2 md:max-lg:justify-center md:max-lg:px-2.5 max-md:mx-2.5 max-md:my-3" [title]="!isSidebarCollapsed() ? '' : (currentUser()?.name || 'User')">
+      <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#4f6ef7] to-[#7c5cfc] text-[13px] font-bold text-white md:max-lg:h-9 md:max-lg:w-9 md:max-lg:text-sm">{{ (currentUser()?.name || 'U')[0] }}</div>
+      <div class="flex min-w-0 flex-1 flex-col md:max-lg:hidden max-md:flex">
+        <span class="overflow-hidden text-ellipsis whitespace-nowrap text-[12.5px] font-semibold text-white/85">{{ currentUser()?.name || 'User' }}</span>
+        <span class="text-[10.5px] capitalize text-white/35">{{ currentUser()?.role || 'Member' }}</span>
       </div>
     </div>
   </aside>
 
   <!-- ═══════════════════════════ MAIN ═══════════════════════════ -->
-  <div class="layout-main">
+  <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
 
     <!-- HEADER -->
-    <header class="topbar">
-      <div class="topbar-left">
+    <header class="z-[90] mx-3 mt-3 flex h-14 shrink-0 items-center justify-between gap-3 rounded-t-xl border-b border-surface-border bg-surface-card px-5 shadow-sm">
+      <div class="flex min-w-0 flex-1 items-center gap-3">
         <!-- Hamburger -->
-        <button class="topbar-icon-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <button class="flex h-[34px] w-[34px] shrink-0 cursor-pointer items-center justify-center rounded-lg border border-transparent bg-transparent text-gray-500 transition-all duration-150 hover:border-surface-border hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-50" (click)="toggleSidebar()" aria-label="Toggle sidebar">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"/>
             <line x1="3" y1="12" x2="21" y2="12"/>
@@ -125,18 +121,18 @@
         </button>
 
         <!-- Page title + breadcrumb -->
-        <div class="topbar-breadcrumb">
-          <span class="topbar-page-title">{{ pageTitle() }}</span>
+        <div class="min-w-0">
+          <span class="overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-semibold text-gray-900">{{ pageTitle() }}</span>
         </div>
       </div>
 
-      <div class="topbar-right">
+      <div class="flex shrink-0 items-center gap-1.5">
         <!-- Connection status -->
         <app-connection-status></app-connection-status>
 
         <!-- Theme toggle -->
         <button
-          class="topbar-icon-btn theme-toggle"
+          class="flex h-[34px] w-[34px] shrink-0 cursor-pointer items-center justify-center rounded-lg border border-transparent bg-transparent text-[0] text-gray-500 transition-all duration-150 hover:border-surface-border hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-50"
           (click)="toggleTheme()"
           [title]="themeService.isDarkMode() ? 'Light mode' : 'Dark mode'"
         >
@@ -160,7 +156,7 @@
 
         <!-- Language toggle -->
         <button
-          class="topbar-lang-btn"
+          class="h-[34px] cursor-pointer rounded-lg border border-transparent bg-transparent px-2.5 text-[11.5px] font-bold tracking-[0.05em] text-gray-500 transition-all duration-150 hover:border-surface-border hover:bg-gray-100 hover:text-gray-800"
           (click)="toggleLanguage()"
           title="Toggle language"
         >
@@ -168,15 +164,15 @@
         </button>
 
         <!-- User menu -->
-        <div class="user-menu-wrapper">
+        <div class="relative">
           <button
-            class="user-menu-trigger"
+            class="flex cursor-pointer items-center gap-1.5 rounded-lg border border-transparent bg-transparent px-1 py-0.5 pr-2 transition-colors hover:border-surface-border hover:bg-gray-100 dark:hover:bg-gray-50"
             (click)="isUserMenuOpen.set(!isUserMenuOpen())"
             [attr.aria-expanded]="isUserMenuOpen()"
           >
-            <div class="topbar-avatar">{{ (currentUser()?.name || 'U')[0] }}</div>
+            <div class="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#4f6ef7] to-[#7c5cfc] text-xs font-bold text-white">{{ (currentUser()?.name || 'U')[0] }}</div>
             <svg
-              class="user-menu-chevron"
+              class="text-gray-400 transition-transform duration-150"
               [class.rotated]="isUserMenuOpen()"
               width="14" height="14" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="2.5"
@@ -188,28 +184,28 @@
           <div
             *ngIf="isUserMenuOpen()"
             [@fadeIn]
-            class="user-dropdown"
+            class="absolute right-0 top-[calc(100%+8px)] z-[200] w-[210px] overflow-hidden rounded-[10px] border border-surface-border bg-surface-card shadow-xl rtl:right-auto rtl:left-0"
           >
-            <div class="user-dropdown-header">
-              <p class="user-dropdown-name">{{ currentUser()?.name }}</p>
-              <p class="user-dropdown-email">{{ currentUser()?.email }}</p>
+            <div class="border-b border-surface-divider bg-gray-25 px-3.5 py-3">
+              <p class="m-0 text-[13px] font-semibold text-gray-900">{{ currentUser()?.name }}</p>
+              <p class="m-0 mt-0.5 text-[11.5px] text-gray-500">{{ currentUser()?.email }}</p>
             </div>
-            <a routerLink="/profile" class="user-dropdown-item">
+            <a routerLink="/profile" class="flex w-full cursor-pointer items-center gap-2 border-0 bg-transparent px-3.5 py-2.5 text-left text-[13px] text-gray-700 no-underline transition-colors hover:bg-gray-50 hover:text-gray-900">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
               </svg>
               Profile
             </a>
-            <a routerLink="/settings" class="user-dropdown-item">
+            <a routerLink="/settings" class="flex w-full cursor-pointer items-center gap-2 border-0 bg-transparent px-3.5 py-2.5 text-left text-[13px] text-gray-700 no-underline transition-colors hover:bg-gray-50 hover:text-gray-900">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
               </svg>
               Settings
             </a>
-            <div class="user-dropdown-divider"></div>
-            <button class="user-dropdown-item danger" (click)="logout()">
+            <div class="my-0.5 h-px bg-surface-divider"></div>
+            <button class="flex w-full cursor-pointer items-center gap-2 border-0 bg-transparent px-3.5 py-2.5 text-left text-[13px] text-error no-underline transition-colors hover:bg-error-muted" (click)="logout()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                 <polyline points="16 17 21 12 16 7"/>
@@ -223,7 +219,7 @@
     </header>
 
     <!-- PAGE CONTENT -->
-    <main class="page-content" [@routeAnimation]>
+    <main class="mx-3 mb-3 flex-1 overflow-x-hidden overflow-y-auto rounded-b-xl" [@routeAnimation]>
       <router-outlet></router-outlet>
     </main>
   </div>

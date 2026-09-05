@@ -44,8 +44,7 @@ interface User {
     ConnectionStatusComponent,
   ],
   animations: [routeAnimation, fadeIn],
-  templateUrl: './dashboard-layout.component.html',
-  styleUrl: './dashboard-layout.component.css'
+  templateUrl: './dashboard-layout.component.html'
 })
 export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   // Services
@@ -111,7 +110,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
    * Setup tooltip positioning for nav items on mid/small screens
    */
   private setupTooltips(): void {
-    const navItems = document.querySelectorAll('.nav-item[data-tooltip]');
+    const navItems = document.querySelectorAll('[data-tooltip]');
     
     navItems.forEach((item: Element) => {
       const navItem = item as HTMLElement;
@@ -120,7 +119,7 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
         if (window.innerWidth >= 1024) return; // Only on mid/small screens
         
         const target = e.target as HTMLElement;
-        const closestNavItem = target.closest('.nav-item') as HTMLElement;
+        const closestNavItem = target.closest('[data-tooltip]') as HTMLElement;
         const rect = closestNavItem.getBoundingClientRect();
         const tooltip = this.getOrCreateTooltip();
         
@@ -165,21 +164,8 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy, AfterViewIni
     if (!tooltip) {
       tooltip = document.createElement('div');
       tooltip.id = 'tooltip-container';
-      tooltip.style.cssText = `
-        position: fixed;
-        background-color: var(--color-primary, #4f6ef7);
-        color: white;
-        padding: 10px 16px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        white-space: nowrap;
-        z-index: 99999;
-        box-shadow: 0 6px 20px rgba(79,110,247,0.4);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 200ms ease-out;
-      `;
+      tooltip.className =
+        'fixed z-[99999] rounded-lg bg-primary px-4 py-2.5 text-[13px] font-semibold whitespace-nowrap text-white shadow-[0_6px_20px_rgba(79,110,247,0.4)] opacity-0 pointer-events-none transition-opacity duration-200';
       document.body.appendChild(tooltip);
     }
     

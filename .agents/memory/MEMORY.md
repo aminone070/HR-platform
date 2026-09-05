@@ -1,0 +1,1 @@
+- [Tailwind v4 config loading](tailwind-v4-config.md) — custom Tailwind tokens require an explicit @config reference from the global stylesheet.

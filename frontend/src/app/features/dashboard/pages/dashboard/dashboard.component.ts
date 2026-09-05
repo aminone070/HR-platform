@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 
       .page {
         padding: 28px 28px 40px;
-        max-width: 1400px;
       }
 
       /* ── Stat grid ─────────────────── */

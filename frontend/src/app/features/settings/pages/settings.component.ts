@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { I18nService, ThemeService } from '../../../core';
+import { SelectComponent, SelectOption } from '../../../shared/components/ui/select/select.component';
 import * as PreferencesActions from '../store/preferences.actions';
 import {
   selectDefaultDashboard,
@@ -23,7 +23,7 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="min-h-full bg-surface-bg p-4 sm:p-6 lg:p-8">
@@ -90,17 +90,13 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
                 </div>
               </div>
 
-              <label class="block">
-                <span class="mb-2 block text-sm font-medium text-gray-700">Language</span>
-                <select
-                  [ngModel]="language$ | async"
-                  (ngModelChange)="setLanguage($event)"
-                  class="w-full rounded-lg border border-gray-200 bg-surface-card px-3 py-2.5 text-sm text-gray-800 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary-muted"
-                >
-                  <option value="en">English</option>
-                  <option value="ar">العربية</option>
-                </select>
-              </label>
+              <app-select
+                label="Language"
+                ariaLabel="Language"
+                [options]="languageOptions"
+                [value]="language$ | async"
+                (selectionChange)="setLanguage($event)"
+              ></app-select>
             </div>
           </article>
 
@@ -176,31 +172,20 @@ import { SavedFilter, UserPreferences } from '../store/preferences.state';
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2">
-              <label class="block">
-                <span class="mb-2 block text-sm font-medium text-gray-700">Default dashboard</span>
-                <select
-                  [ngModel]="defaultDashboard$ | async"
-                  (ngModelChange)="updatePreference({ defaultDashboard: $event })"
-                  class="w-full rounded-lg border border-gray-200 bg-surface-card px-3 py-2.5 text-sm text-gray-800 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary-muted"
-                >
-                  <option value="main">Executive overview</option>
-                  <option value="workforce">Workforce analytics</option>
-                  <option value="attendance">Attendance</option>
-                </select>
-              </label>
-              <label class="block">
-                <span class="mb-2 block text-sm font-medium text-gray-700">Rows per page</span>
-                <select
-                  [ngModel]="itemsPerPage$ | async"
-                  (ngModelChange)="updatePreference({ itemsPerPage: +$event })"
-                  class="w-full rounded-lg border border-gray-200 bg-surface-card px-3 py-2.5 text-sm text-gray-800 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary-muted"
-                >
-                  <option [value]="10">10 rows</option>
-                  <option [value]="25">25 rows</option>
-                  <option [value]="50">50 rows</option>
-                  <option [value]="100">100 rows</option>
-                </select>
-              </label>
+              <app-select
+                label="Default dashboard"
+                ariaLabel="Default dashboard"
+                [options]="dashboardOptions"
+                [value]="defaultDashboard$ | async"
+                (selectionChange)="updatePreference({ defaultDashboard: $event })"
+              ></app-select>
+              <app-select
+                label="Rows per page"
+                ariaLabel="Rows per page"
+                [options]="pageSizeOptions"
+                [value]="itemsPerPage$ | async"
+                (selectionChange)="updatePreference({ itemsPerPage: +$event })"
+              ></app-select>
             </div>
           </article>
         </section>
@@ -288,6 +273,19 @@ export class SettingsComponent implements OnInit {
   readonly itemsPerPage$ = this.store.select(selectItemsPerPage);
   readonly defaultDashboard$ = this.store.select(selectDefaultDashboard);
   readonly savedFilters$ = this.store.select(selectSavedFilters);
+  readonly languageOptions: SelectOption[] = [
+    { value: 'en', label: 'English' },
+    { value: 'ar', label: 'العربية' },
+  ];
+  readonly dashboardOptions: SelectOption[] = [
+    { value: 'main', label: 'Executive overview' },
+    { value: 'workforce', label: 'Workforce analytics' },
+    { value: 'attendance', label: 'Attendance' },
+  ];
+  readonly pageSizeOptions: SelectOption[] = [10, 25, 50, 100].map((size) => ({
+    value: size,
+    label: `${size} rows`,
+  }));
 
   ngOnInit(): void {
     this.store.dispatch(PreferencesActions.loadPreferences());

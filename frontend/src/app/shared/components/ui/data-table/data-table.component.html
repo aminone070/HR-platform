@@ -11,17 +11,12 @@
  </span>
  </div>
  <div class="flex items-center gap-2">
- <select
- [(ngModel)]="pageSizeInternal"
- (change)="onPageSizeChange()"
- class="px-3 py-2 border border-gray-300 rounded-md bg-surface-card text-gray-900 text-sm focus:ring-2 focus:ring-primary outline-none transition-all"
- aria-label="Items per page"
- >
- <option [value]="10">10 {{ i18n.translate('common.records') }}</option>
- <option [value]="25">25 {{ i18n.translate('common.records') }}</option>
- <option [value]="50">50 {{ i18n.translate('common.records') }}</option>
- <option [value]="100">100 {{ i18n.translate('common.records') }}</option>
- </select>
+  <app-select
+  ariaLabel="Items per page"
+  [options]="pageSizeOptions"
+  [value]="pageSizeInternal()"
+  (selectionChange)="onPageSizeSelect($event)"
+  ></app-select>
  </div>
 </div>
 
